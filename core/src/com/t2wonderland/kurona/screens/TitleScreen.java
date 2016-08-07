@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.t2wonderland.kurona.Assets;
 import com.t2wonderland.kurona.KuronanDash;
-import com.t2wonderland.kurona.models.OverlapCheker;
+import com.t2wonderland.kurona.models.OverlapChecker;
 
 public class TitleScreen implements Screen {
 
@@ -38,22 +38,22 @@ public class TitleScreen implements Screen {
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			camera.unproject(touchPos);
 
-			if (OverlapCheker.pointInRectangle(startBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.pointInRectangle(startBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new SelectScreen(game));
 				return;
 			}
-			if (OverlapCheker.pointInRectangle(scoresBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.pointInRectangle(scoresBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new ScoresScreen(game));
 				return;
 			}
-			if (OverlapCheker.pointInRectangle(tutorialBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.pointInRectangle(tutorialBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new TutorialScreen(game));
 				return;
 			}
-			if (OverlapCheker.pointInRectangle(exitBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.pointInRectangle(exitBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new ExitScreen(game));
 				return;
