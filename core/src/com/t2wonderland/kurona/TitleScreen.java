@@ -24,13 +24,9 @@ public class TitleScreen implements Screen {
 
 		// regions of the buttons
 		startBounds = Assets.titleStart.getBoundingRectangle();
-		startBounds.set(startBounds.getX(), startBounds.getY(), startBounds.width, startBounds.height);
 		scoresBounds = Assets.titleScore.getBoundingRectangle();
-		scoresBounds.set(170, 30, scoresBounds.width, scoresBounds.height);
 		tutorialBounds = Assets.titleTutorial.getBoundingRectangle();
-		tutorialBounds.set(320, 30, tutorialBounds.width, tutorialBounds.height);
 		exitBounds = Assets.titleExit.getBoundingRectangle();
-		exitBounds.set(470, 30, exitBounds.width, exitBounds.height);
 	}
 	
 	public void update (float deltaTime) {

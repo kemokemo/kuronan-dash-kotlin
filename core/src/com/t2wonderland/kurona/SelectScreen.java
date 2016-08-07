@@ -24,15 +24,10 @@ public class SelectScreen implements Screen {
 		
 		// regions of the buttons
 		kuronaBounds = Assets.selectKurona.getBoundingRectangle();
-		kuronaBounds.set(kuronaBounds.getX(), kuronaBounds.getY(), kuronaBounds.width, kuronaBounds.height);
 		komaBounds = Assets.selectKoma.getBoundingRectangle();
-		komaBounds.set(komaBounds.getX(), komaBounds.getY(), komaBounds.width, komaBounds.height);
 		shishimaruBounds = Assets.selectShishimaru.getBoundingRectangle();
-		shishimaruBounds.set(shishimaruBounds.getX(), shishimaruBounds.getY(), shishimaruBounds.width, shishimaruBounds.height);
 		backBounds = Assets.selectBack.getBoundingRectangle();
-		backBounds.set(backBounds.getX(), backBounds.getY(), backBounds.width, backBounds.height);
 		startBounds = Assets.selectStart.getBoundingRectangle();
-		startBounds.set(startBounds.getX(), startBounds.getY(), startBounds.width, startBounds.height);
 	}
 
 	public void update (float deltaTime) {

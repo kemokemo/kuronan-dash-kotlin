@@ -1,5 +1,7 @@
 package com.t2wonderland.kurona;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class Kurona extends DynamicGameObject {
 	public static final int STATE_DASH = 0;
 	public static final int STATE_HIT = 1;
@@ -25,20 +27,20 @@ public class Kurona extends DynamicGameObject {
 		maxVelY = VELOCITY_DASH;
 	}
 	
-	public void update (float deltaTime) {
+	public void update (float deltaTime, Vector2 accel) {
 		float velX;
 		if (maxVelX < velocity.x){
 			velX = 0;
 		}
 		else{
-			velX = World.acel.x * deltaTime;
+			velX = accel.x * deltaTime;
 		}
 		float velY;
 		if (maxVelY < velocity.y){
 			velY = 0;
 		}
 		else{
-			velY = World.acel.y * deltaTime;
+			velY = accel.y * deltaTime;
 		}
 		velocity.add(velX, velY);
 

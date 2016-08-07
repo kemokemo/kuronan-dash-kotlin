@@ -33,13 +33,13 @@ public class GameScreen implements Screen {
 			@Override
 			public void sp () {
 				// 技発動サウンド
-				//Assets.playSound(Assets.spSound);
+				Assets.playSound(Assets.spSound);
 			}
 
 			@Override
 			public void food () {
 				// 食べ物たべるサウンド
-				//Assets.playSound(Assets.foodSound);
+				Assets.playSound(Assets.foodSound);
 			}
 		};
 		world = new World(worldListener);
@@ -59,7 +59,7 @@ public class GameScreen implements Screen {
 	}
 	
 	private void updateRunning (float deltaTime) {
-		world.update(deltaTime, 1);
+		world.update(deltaTime, World.acel);
 
 		// 点数を更新
 	}

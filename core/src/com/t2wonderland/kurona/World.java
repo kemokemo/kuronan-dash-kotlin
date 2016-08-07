@@ -26,15 +26,15 @@ public class World {
 	}
 
 	// 800*480がターゲット解像度で、32*32を1マスとすると25*15マス
-	public static final float WIDTH = 25;
-	public static final float HEIGHT = 15;
+	public static final int WIDTH = 25;
+	public static final int HEIGHT = 15;
 	public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
 	public static final int WORLD_STATE_GAME_OVER = 2;
 
 	public final Kurona kurona;
 	public final Rock rock;
-	public static Vector2 acel = new Vector2(1f, 0);
+	public static Vector2 acel = new Vector2(1f, 0f);
 	public final WorldListener listener;
 
 	public int score;
@@ -54,7 +54,7 @@ public class World {
 		// settings of the level
 	}
 
-	public void update (float deltaTime, float accelX) {
+	public void update (float deltaTime, Vector2 accel) {
 
 		if (checkCollisions()){
 			kurona.hitBlock();
@@ -62,12 +62,12 @@ public class World {
 		else{
 			kurona.releaseBlock();
 		}
-		updateKurona(deltaTime, accelX);
+		updateKurona(deltaTime, accel);
 		checkGameOver();
 	}
 
-	private void updateKurona (float deltaTime, float accelX) {
-		kurona.update(deltaTime);
+	private void updateKurona (float deltaTime, Vector2 accel) {
+		kurona.update(deltaTime, accel);
 	}
 
 	private boolean checkCollisions () {

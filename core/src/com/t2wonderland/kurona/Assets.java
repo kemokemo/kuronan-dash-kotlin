@@ -25,20 +25,25 @@ public class Assets {
 	public static Sprite gameBack;
 	public static TextureRegion gameRock;
 	public static Music gameMusic;
+	public static Sound foodSound, jumpSound, spSound;
+
+	public static int dot;
 
 	public static void load() {
+		dot = 32;
+
 		// title pictures
 		titleAtlas = new TextureAtlas(Gdx.files.internal("title.pack"));
 		titleBack = titleAtlas.createSprite("titleBack");
 		titleBack.setPosition(0, 0);		
 		titleStart = titleAtlas.createSprite("titleStart");
-		titleStart.setPosition(32, 32);		
+		titleStart.setPosition(dot, dot);
 		titleScore = titleAtlas.createSprite("titleScore");
-		titleScore.setPosition(32*6, 32);		
+		titleScore.setPosition(dot*6, dot);
 		titleTutorial = titleAtlas.createSprite("titleTutorial");
-		titleTutorial.setPosition(32*11, 32);		
+		titleTutorial.setPosition(dot*11, dot);
 		titleExit = titleAtlas.createSprite("titleExit");
-		titleExit.setPosition(32 * 20, 32);
+		titleExit.setPosition(dot*20, dot);
 
 		// title music
 		titleMusic = Gdx.audio.newMusic(Gdx.files.internal("title.mp3"));
@@ -52,17 +57,17 @@ public class Assets {
 		// select
 		selectAtlas = new TextureAtlas(Gdx.files.internal("select.pack"));
 		selectKurona = selectAtlas.createSprite("selectKurona");
-		selectKurona.setPosition(32, 32*11);
+		selectKurona.setPosition(dot, dot*11);
 		selectKoma = selectAtlas.createSprite("selectKoma");
-		selectKoma.setPosition(32, 32*6);
+		selectKoma.setPosition(dot, dot*6);
 		selectShishimaru = selectAtlas.createSprite("selectShishimaru");
-		selectShishimaru.setPosition(32, 32);
+		selectShishimaru.setPosition(dot, dot);
 		selectDescription = selectAtlas.createSprite("selectDescription");
-		selectDescription.setPosition(32*15, 32*4);
+		selectDescription.setPosition(dot*15, dot*4);
 		selectBack = selectAtlas.createSprite("selectBack");
-		selectBack.setPosition(32*15, 32);
+		selectBack.setPosition(dot*15, dot);
 		selectStart = selectAtlas.createSprite("selectStart");
-		selectStart.setPosition(32*20, 32);
+		selectStart.setPosition(dot*20, dot);
 
 		// game
 		gameAtlas = new TextureAtlas(Gdx.files.internal("game.pack"));
@@ -74,7 +79,7 @@ public class Assets {
 		Texture bgImg = new Texture("bgSmall.png");
 		// ÉQÅ[ÉÄâÊñ ÇÃîwåiÇâÊëú20ñáï™ÇÃÉXÉeÅ[ÉWÇ…Ç∑ÇÈ
 		bgImg.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-		gameBack = new Sprite(bgImg, 0,0, 25*20, 15);
+		gameBack = new Sprite(bgImg, 0,0, World.WIDTH*20, World.HEIGHT);
 		gameBack.setU(0);
 		gameBack.setU2(20);
 		gameBack.setV(0);
@@ -82,6 +87,9 @@ public class Assets {
 		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("game1.mp3"));
 		gameMusic.setLooping(true);
 		gameMusic.setVolume(0.5f);
+		foodSound = Gdx.audio.newSound(Gdx.files.internal("foodSound.wav"));
+		jumpSound = Gdx.audio.newSound(Gdx.files.internal("jumpSound.wav"));
+		spSound = Gdx.audio.newSound(Gdx.files.internal("spSound.wav"));
 	}
 
 	public static void playSound(Sound sound) {
