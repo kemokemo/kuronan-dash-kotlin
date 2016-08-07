@@ -1,27 +1,53 @@
 package com.t2wonderland.kurona;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class KuronanDash extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+public class KuronanDash extends Game {
 	
+	SpriteBatch batch;
+    BitmapFont font;
+	public static int displayWidth, displayHeight;
+    
+    ShapeRenderer renderer;
+    
 	@Override
-	public void create () {
+	public void create() {
+		displayWidth = 800;
+		displayHeight = 480;
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		renderer = new ShapeRenderer();
+        //Use LibGDX's default Arial font.
+        font = new BitmapFont();
+        Assets.load();
+        this.setScreen(new TitleScreen(this));
 	}
 
 	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	public void dispose() {
+		super.dispose();
+		getScreen().dispose();
+		
+		batch.dispose();
+		font.dispose();
+	}
+
+	@Override
+	public void render() {		
+		super.render(); //important!
+	}
+
+	@Override
+	public void resize(int width, int height) {
+	}
+
+	@Override
+	public void pause() {
+	}
+
+	@Override
+	public void resume() {
 	}
 }

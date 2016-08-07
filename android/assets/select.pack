@@ -1,0 +1,47 @@
+
+select.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+selectDescription
+  rotate: false
+  xy: 1, 67
+  size: 288, 320
+  orig: 288, 320
+  offset: 0, 0
+  index: -1
+selectShishimaru
+  rotate: false
+  xy: 291, 291
+  size: 384, 96
+  orig: 384, 96
+  offset: 0, 0
+  index: -1
+selectKurona
+  rotate: false
+  xy: 291, 193
+  size: 384, 96
+  orig: 384, 96
+  offset: 0, 0
+  index: -1
+selectKoma
+  rotate: false
+  xy: 291, 95
+  size: 384, 96
+  orig: 384, 96
+  offset: 0, 0
+  index: -1
+selectStart
+  rotate: false
+  xy: 1, 1
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+selectBack
+  rotate: false
+  xy: 677, 323
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
