@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -14,6 +16,7 @@ public class WorldRenderer {
 	OrthographicCamera camera;
 	SpriteBatch batch;
 	Viewport viewport;
+	Vector2 pos;
 	
 	public WorldRenderer(SpriteBatch batch, World world) {
 		this.world = world;
@@ -23,6 +26,7 @@ public class WorldRenderer {
 		this.camera = new OrthographicCamera(World.WIDTH, World.HEIGHT);
 		this.camera.setToOrtho(false, World.WIDTH, World.HEIGHT);
 		viewport = new FitViewport(World.WIDTH, World.HEIGHT, camera);
+		pos = new Vector2();
 	}
 	
 	public void render () {
@@ -68,6 +72,25 @@ public class WorldRenderer {
 			case Kurona.STATE_DASH:
 			default:
 				keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
+		}
+
+		if (Gdx.input.justTouched()){
+			Vector3 touchPos = new Vector3();
+			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+			camera.unproject(touchPos);
+
+			if ( 0 <= touchPos.y && touchPos.y < 5 ){
+				world.kurona.position.y = 1;
+			}
+			else if ( 5 <= touchPos.y && touchPos.y < 10 ){
+				world.kurona.position.y = 6;
+			}
+			else if (10 <= touchPos.y && touchPos.y < 15){
+				world.kurona.position.y = 11;
+			}
+			else{
+				// ”ÍˆÍŠOA‚È‚É‚à‚µ‚È‚¢
+			}
 		}
 
 		batch.draw(keyFrame, world.kurona.position.x, world.kurona.position.y, Kurona.WIDTH, Kurona.HEIGHT);
