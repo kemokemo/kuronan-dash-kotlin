@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.t2wonderland.kurona.Interfaces.IStaticObject
 
-class Candy : IStaticObject {
+class Rock : IStaticObject {
 
     private val WIDTH = 1f
     internal var HEIGHT = 1f
