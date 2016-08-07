@@ -1,4 +1,4 @@
-package com.t2wonderland.kurona.interfaces;
+package com.t2wonderland.kurona.Interfaces;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;

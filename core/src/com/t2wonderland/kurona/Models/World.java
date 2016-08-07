@@ -1,14 +1,13 @@
-package com.t2wonderland.kurona.models;
+package com.t2wonderland.kurona.Models;
 
 import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.t2wonderland.kurona.interfaces.IGameObject;
-import com.t2wonderland.kurona.objects.Candy;
-import com.t2wonderland.kurona.objects.Kurona;
-import com.t2wonderland.kurona.objects.Rock;
+import com.t2wonderland.kurona.Interfaces.IGameObject;
+import com.t2wonderland.kurona.Objects.Candy;
+import com.t2wonderland.kurona.Objects.Kurona;
+import com.t2wonderland.kurona.Objects.Rock;
 
 public class World {
 

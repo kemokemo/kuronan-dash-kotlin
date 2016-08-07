@@ -1,13 +1,13 @@
-package com.t2wonderland.kurona.screens;
+package com.t2wonderland.kurona.Screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.t2wonderland.kurona.*;
-import com.t2wonderland.kurona.models.World;
-import com.t2wonderland.kurona.models.WorldRenderer;
-import com.t2wonderland.kurona.models.WorldListener;
-import com.t2wonderland.kurona.models.GameState;
+import com.t2wonderland.kurona.Models.World;
+import com.t2wonderland.kurona.Models.WorldRenderer;
+import com.t2wonderland.kurona.Models.WorldListener;
+import com.t2wonderland.kurona.Models.GameState;
 
 public class GameScreen implements Screen {
 

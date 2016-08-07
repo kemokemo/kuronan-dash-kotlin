@@ -1,4 +1,4 @@
-package com.t2wonderland.kurona.interfaces;
+package com.t2wonderland.kurona.Interfaces;
 
 public interface IDynamicGameObjext {
 }

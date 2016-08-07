@@ -1,4 +1,4 @@
-package com.t2wonderland.kurona.screens;
+package com.t2wonderland.kurona.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;

@@ -1,8 +1,8 @@
-package com.t2wonderland.kurona.objects;
+package com.t2wonderland.kurona.Objects;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.t2wonderland.kurona.interfaces.IGameObject;
+import com.t2wonderland.kurona.Interfaces.IGameObject;
 
 public class Candy implements IGameObject {
 

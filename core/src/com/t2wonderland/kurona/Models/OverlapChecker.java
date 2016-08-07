@@ -14,7 +14,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package com.t2wonderland.kurona.models;
+package com.t2wonderland.kurona.Models;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;

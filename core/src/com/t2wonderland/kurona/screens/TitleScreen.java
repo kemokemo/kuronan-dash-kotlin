@@ -1,4 +1,4 @@
-package com.t2wonderland.kurona.screens;
+package com.t2wonderland.kurona.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.t2wonderland.kurona.Assets;
 import com.t2wonderland.kurona.KuronanDash;
-import com.t2wonderland.kurona.models.OverlapChecker;
+import com.t2wonderland.kurona.Models.OverlapChecker;
 
 public class TitleScreen implements Screen {
 

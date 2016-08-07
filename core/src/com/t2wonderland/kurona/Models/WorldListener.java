@@ -1,7 +1,7 @@
-package com.t2wonderland.kurona.models;
+package com.t2wonderland.kurona.Models;
 
 import com.t2wonderland.kurona.Assets;
-import com.t2wonderland.kurona.interfaces.IWorldListener;
+import com.t2wonderland.kurona.Interfaces.IWorldListener;
 
 public class WorldListener implements IWorldListener {
     @Override

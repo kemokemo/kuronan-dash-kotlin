@@ -1,4 +1,4 @@
-package com.t2wonderland.kurona.models;
+package com.t2wonderland.kurona.Models;
 
 public enum GameState{
     Ready,

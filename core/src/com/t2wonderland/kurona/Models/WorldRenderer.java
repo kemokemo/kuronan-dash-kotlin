@@ -1,4 +1,4 @@
-package com.t2wonderland.kurona.models;
+package com.t2wonderland.kurona.Models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -10,9 +10,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.t2wonderland.kurona.Assets;
-import com.t2wonderland.kurona.interfaces.IGameObject;
-import com.t2wonderland.kurona.objects.Candy;
-import com.t2wonderland.kurona.objects.Kurona;
+import com.t2wonderland.kurona.Interfaces.IGameObject;
+import com.t2wonderland.kurona.Objects.Kurona;
 
 public class WorldRenderer {
 

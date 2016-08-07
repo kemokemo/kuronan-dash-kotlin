@@ -1,7 +1,7 @@
-package com.t2wonderland.kurona.objects;
+package com.t2wonderland.kurona.Objects;
 
 import com.badlogic.gdx.math.Vector2;
-import com.t2wonderland.kurona.models.DynamicGameObject;
+import com.t2wonderland.kurona.Models.DynamicGameObject;
 
 public class Kurona extends DynamicGameObject {
 	public static final int STATE_DASH = 0;
