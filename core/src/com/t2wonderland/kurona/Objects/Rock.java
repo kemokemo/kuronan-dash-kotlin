@@ -14,7 +14,7 @@ public class Rock implements IGameObject{
     Rectangle _bounds;
 
     @Override
-    public void setInitialPosition(int x, int y) {
+    public void setInitialPosition(float x, float y) {
         this._position = new Vector2(x, y);
         this._bounds = new Rectangle(x - WIDTH / 2, y - HEIGHT / 2, WIDTH, HEIGHT);
     }

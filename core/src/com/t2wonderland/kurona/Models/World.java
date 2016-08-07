@@ -45,7 +45,7 @@ public class World {
 		// settings of the level
 		while (candys.size() < 10){
 			Candy candy = new Candy();
-			candy.setInitialPosition(WIDTH*20*(int)rand.nextFloat(), 1);
+			candy.setInitialPosition(WIDTH*20*rand.nextFloat(), 1);
 			candys.add(candy);
 		}
 	}
