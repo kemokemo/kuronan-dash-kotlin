@@ -56,18 +56,18 @@ public class WorldRenderer {
 	private void renderKurona () {
 		TextureRegion keyFrame;
 		switch (world.kurona.state) {
-		case Kurona.STATE_HIT:
-			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
-			break;
-		case Kurona.STATE_SLOW:
-			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
-			break;
-		case Kurona.STATE_SP:
-			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
-			break;
-		case Kurona.STATE_DASH:
-		default:
-			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
+			case Kurona.STATE_HIT:
+				keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
+				break;
+			case Kurona.STATE_SLOW:
+				keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
+				break;
+			case Kurona.STATE_SP:
+				keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
+				break;
+			case Kurona.STATE_DASH:
+			default:
+				keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
 		}
 
 		batch.draw(keyFrame, world.kurona.position.x, world.kurona.position.y, Kurona.WIDTH, Kurona.HEIGHT);
@@ -78,6 +78,7 @@ public class WorldRenderer {
 	
 	private void renderItems () {
 		batch.draw(Assets.gameRock, world.rock.position.x, world.rock.position.y, Rock.WIDTH, Rock.HEIGHT);
+		batch.draw(Assets.gameCandy, world.candy.position.x, world.candy.position.y, Candy.WIDTH, Candy.HEIGHT);
 	}
 	
 	private void renderGoal () {

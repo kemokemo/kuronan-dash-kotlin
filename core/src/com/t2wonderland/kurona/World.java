@@ -34,6 +34,7 @@ public class World {
 
 	public final Kurona kurona;
 	public final Rock rock;
+	public final Candy candy;
 	public static Vector2 acel = new Vector2(1f, 0f);
 	public final WorldListener listener;
 
@@ -43,6 +44,7 @@ public class World {
 	public World (WorldListener listener) {
 		this.kurona = new Kurona(1, 1);
 		this.rock = new Rock(10,1);
+		this.candy = new Candy(20,1);
 		this.listener = listener;
 		generateLevel();
 
@@ -55,23 +57,33 @@ public class World {
 	}
 
 	public void update (float deltaTime, Vector2 accel) {
-
-		if (checkCollisions()){
-			kurona.hitBlock();
-		}
-		else{
-			kurona.releaseBlock();
-		}
-		updateKurona(deltaTime, accel);
 		checkGameOver();
+		checkCollisions();
+		updateKurona(deltaTime, accel);
 	}
 
 	private void updateKurona (float deltaTime, Vector2 accel) {
 		kurona.update(deltaTime, accel);
 	}
 
-	private boolean checkCollisions () {
-		return OverlapTester.overlapRectangles(kurona.bounds, rock.bounds);
+	private void checkCollisions () {
+		checkRockCollisions();
+		checkCandyCollisions();
+	}
+
+	private void checkRockCollisions () {
+		if (OverlapTester.overlapRectangles(kurona.bounds, rock.bounds)){
+			kurona.hitRock();
+		}
+		else{
+			kurona.releaseBlock();
+		}
+	}
+
+	private void checkCandyCollisions(){
+		if (OverlapTester.overlapRectangles(kurona.bounds, candy.bounds)){
+			listener.food();
+		}
 	}
 
 	private void checkGameOver () {

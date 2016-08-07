@@ -23,7 +23,7 @@ public class Assets {
 	public static TextureRegion[] runFrames = new TextureRegion[3];
 	public static Animation kuronaRun;
 	public static Sprite gameBack;
-	public static TextureRegion gameRock;
+	public static TextureRegion gameRock, gameCandy;
 	public static Music gameMusic;
 	public static Sound foodSound, jumpSound, spSound;
 
@@ -76,6 +76,7 @@ public class Assets {
 		}
 		kuronaRun = new Animation(0.1f, runFrames);
 		gameRock = gameAtlas.findRegion("rock-normal");
+		gameCandy = gameAtlas.findRegion("candy-normal");
 		Texture bgImg = new Texture("bgSmall.png");
 		// ゲーム画面の背景を画像20枚分のステージにする
 		bgImg.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);

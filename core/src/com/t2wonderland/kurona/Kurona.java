@@ -60,7 +60,7 @@ public class Kurona extends DynamicGameObject {
 	}
 	
 	// hit
-	public void hitBlock () {
+	public void hitRock () {
 		velocity.x = VELOCITY_SLOW;
 		state = STATE_SLOW;
 	}
