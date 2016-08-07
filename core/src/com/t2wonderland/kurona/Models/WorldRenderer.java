@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.t2wonderland.kurona.Assets;
+import com.t2wonderland.kurona.Interfaces.CharacterState;
 import com.t2wonderland.kurona.Interfaces.IStaticObject;
 import com.t2wonderland.kurona.Objects.Kurona;
 
@@ -35,8 +36,10 @@ public class WorldRenderer {
 	public void render () {
 		Gdx.gl.glClearColor(0, 0.3f, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		if (world.kurona.position.x > camera.position.x) {
-			camera.position.x = world.kurona.position.x;
+
+		Vector2 position = world._character.getPosition();
+		if (position.x > camera.position.x) {
+			camera.position.x = position.x;
 		}
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
@@ -53,52 +56,66 @@ public class WorldRenderer {
 	
 	public void renderObjects () {
 		batch.begin();
-		renderKurona();
+		renderCharacter();
 		renderPlatforms();
 		renderItems();
 		renderGoal();
 		batch.end();		
 	}
 	
-	private void renderKurona () {
-		TextureRegion keyFrame;
-		switch (world.kurona.state) {
-			case Kurona.STATE_HIT:
-				keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
-				break;
-			case Kurona.STATE_SLOW:
-				keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
-				break;
-			case Kurona.STATE_SP:
-				keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
-				break;
-			case Kurona.STATE_DASH:
-			default:
-				keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
-		}
+	private void renderCharacter() {
+		TextureRegion keyFrame = updateKeyFrame();
 
+		Vector2 position = world._character.getPosition();
+		position = updatePositionFromUserInput(position);
+		world._character.setPosition(position);
+
+		Vector2 size = world._character.getSize();
+		batch.draw(keyFrame, position.x, position.y, size.x, size.y);
+	}
+
+	private Vector2 updatePositionFromUserInput(Vector2 position) {
 		if (Gdx.input.justTouched()){
 			Vector3 touchPos = new Vector3();
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			camera.unproject(touchPos);
 
 			if ( 0 <= touchPos.y && touchPos.y < 5 ){
-				world.kurona.position.y = 1;
+				position.y = 1;
 			}
 			else if ( 5 <= touchPos.y && touchPos.y < 10 ){
-				world.kurona.position.y = 6;
+				position.y = 6;
 			}
 			else if (10 <= touchPos.y && touchPos.y < 15){
-				world.kurona.position.y = 11;
+				position.y = 11;
 			}
 			else{
 				// touched point is out of the range
 			}
 		}
 
-		batch.draw(keyFrame, world.kurona.position.x, world.kurona.position.y, Kurona.WIDTH, Kurona.HEIGHT);
+		return position;
 	}
-	
+
+	private TextureRegion updateKeyFrame() {
+		TextureRegion keyFrame;
+		CharacterState state = world._character.getCharacterState();
+		float stateTime = world._character.getStateTime();
+		switch (state) {
+			case Hit:
+			case Slow:
+			case Special:
+			case Dash:
+				keyFrame = Assets.kuronaRun.getKeyFrame(stateTime, true);
+				break;
+
+			default:
+				keyFrame = Assets.kuronaRun.getKeyFrame(stateTime, true);
+		}
+
+		return keyFrame;
+	}
+
 	private void renderPlatforms () {
 	}
 	

@@ -25,6 +25,11 @@ public class Rock implements IStaticObject {
     }
 
     @Override
+    public void setPosition(Vector2 position) {
+        _position = position;
+    }
+
+    @Override
     public Vector2 getPosition() {
         return _position;
     }

@@ -73,6 +73,7 @@ public class Assets {
 		// game
 		gameAtlas = new TextureAtlas(Gdx.files.internal("game.pack"));
 		for (int i = 0; i < 3; i++) {
+			// TODO: 黒菜のリソース専用になってるのを要修正
 			runFrames[i] = gameAtlas.findRegion( (i+1) + " - kurona-run");
 		}
 		kuronaRun = new Animation(0.1f, runFrames);

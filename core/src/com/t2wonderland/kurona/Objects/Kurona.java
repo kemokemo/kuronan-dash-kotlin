@@ -1,73 +1,142 @@
 package com.t2wonderland.kurona.Objects;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.t2wonderland.kurona.Models.DynamicGameObject;
+import com.t2wonderland.kurona.Interfaces.CharacterState;
+import com.t2wonderland.kurona.Interfaces.ICharacterObject;
 
-public class Kurona extends DynamicGameObject {
-	public static final int STATE_DASH = 0;
-	public static final int STATE_HIT = 1;
-	public static final int STATE_SLOW = 2;
-	public static final int STATE_SP = 3;
-	public static final float VELOCITY_DASH = 10f;
-	public static final float VELOCITY_SLOW = 2.5f;
-	public static final float VELOCITY_SP = 20f;
-	public static final float WIDTH = 2f;
-	public static final float HEIGHT = 2f;
+public class Kurona implements ICharacterObject {
 
-	public int state;
-	public float stateTime;
-	float maxVelX, maxVelY;
+	private float VELOCITY_DASH = 10f;
+	private float VELOCITY_SLOW = 2.5f;
+	private float VELOCITY_SP = 20f;
+
+	private float WIDTH = 2f;
+	private float HEIGHT = 2f;
+
+	private Vector2 _size = new Vector2(WIDTH, HEIGHT);
+	private Vector2 _position;
+	private Rectangle _bounds;
+	private Vector2 _velocity;
+	private CharacterState _state;
+	private float _stateTime;
+	private float _maxVelocityX, _maxVelocityY;
 	
-	public Kurona(float x, float y) {
-		super(x, y, WIDTH, HEIGHT);
-		state = STATE_DASH;
+	public Kurona() {
+		_state = CharacterState.Slow;
+		_stateTime = 0;
+
 		// starting at the slow mode
-		velocity.x = VELOCITY_SLOW;
-		stateTime = 0;
-		maxVelX = VELOCITY_DASH;
-		maxVelY = VELOCITY_DASH;
-	}
-	
-	public void update (float deltaTime, Vector2 accel) {
-		float velX;
-		if (maxVelX < velocity.x){
-			velX = 0;
-		}
-		else{
-			velX = accel.x * deltaTime;
-		}
-		float velY;
-		if (maxVelY < velocity.y){
-			velY = 0;
-		}
-		else{
-			velY = accel.y * deltaTime;
-		}
-		velocity.add(velX, velY);
-
-		// update _position
-		position.add(velocity.x * deltaTime, velocity.y * deltaTime);
-		bounds.x = position.x - bounds.width / 2;
-		bounds.y = position.y - bounds.height / 2;
-		
-		// update status
-		if (state == STATE_SLOW){
-			stateTime += deltaTime/2;
-		}
-		else{
-			stateTime += deltaTime;
-		}
-	}
-	
-	// hit
-	public void hitRock () {
-		velocity.x = VELOCITY_SLOW;
-		state = STATE_SLOW;
+		_velocity = new Vector2();
+		_velocity.x = VELOCITY_SLOW;
+		_maxVelocityX = VELOCITY_DASH;
+		_maxVelocityY = VELOCITY_DASH;
 	}
 
-	// Release
-	public void releaseBlock(){
-		velocity.x = VELOCITY_DASH;
-		state = STATE_DASH;
+	@Override
+	public void updatePosition(float deltaTime, Vector2 accelValue) {
+		updateVelocity(deltaTime, accelValue);
+		updateState(deltaTime);
+		updatePositionAndBounds(deltaTime);
+	}
+
+	private void updateVelocity(float deltaTime, Vector2 accelValue) {
+		Vector2 velocity = calculateVelocity(deltaTime, accelValue);
+		_velocity.add(velocity);
+		adjustVelocity();
+	}
+
+	private Vector2 calculateVelocity(float deltaTime, Vector2 accelValue) {
+		Vector2 velocity = new Vector2();
+		if (_maxVelocityX < _velocity.x){
+			velocity.x = 0;
+		}
+		else{
+			velocity.x = accelValue.x * deltaTime;
+		}
+
+		if (_maxVelocityY < _velocity.y){
+			velocity.y = 0;
+		}
+		else{
+			velocity.y = accelValue.y * deltaTime;
+		}
+
+		return velocity;
+	}
+
+	private void adjustVelocity() {
+		if(_maxVelocityX < _velocity.x)
+		{
+			_velocity.x = _maxVelocityX;
+		}
+
+		if (_maxVelocityY<_velocity.y)
+		{
+			_velocity.y = _maxVelocityY;
+		}
+	}
+
+	private void updateState(float deltaTime) {
+		if (_state == CharacterState.Slow){
+			_stateTime += deltaTime/2;
+		}
+		else{
+			_stateTime += deltaTime;
+		}
+	}
+
+	private void updatePositionAndBounds(float deltaTime) {
+		_position.add(_velocity.x * deltaTime, _velocity.y * deltaTime);
+		_bounds.x = _position.x - _bounds.width / 2;
+		_bounds.y = _position.y - _bounds.height / 2;
+	}
+
+	@Override
+	public CharacterState getCharacterState() {
+		return _state;
+	}
+
+	@Override
+	public float getStateTime() {
+		return _stateTime;
+	}
+
+	@Override
+	public void hitBarricade() {
+		_velocity.x = VELOCITY_SLOW;
+		_state = CharacterState.Slow;
+	}
+
+	@Override
+	public void releaseBarricade() {
+		_velocity.x = VELOCITY_DASH;
+		_state = CharacterState.Dash;
+	}
+
+	@Override
+	public void setInitialPosition(float x, float y) {
+		this._position = new Vector2(x, y);
+		this._bounds = new Rectangle(x - WIDTH / 2, y - HEIGHT / 2, WIDTH, HEIGHT);
+	}
+
+	@Override
+	public Vector2 getSize() {
+		return _size;
+	}
+
+	@Override
+	public void setPosition(Vector2 position) {
+		_position = position;
+	}
+
+	@Override
+	public Vector2 getPosition() {
+		return _position;
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		return _bounds;
 	}
 }

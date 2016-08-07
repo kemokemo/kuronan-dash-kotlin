@@ -4,9 +4,9 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.t2wonderland.kurona.Interfaces.ICharacterObject;
 import com.t2wonderland.kurona.Interfaces.IStaticObject;
 import com.t2wonderland.kurona.Objects.Candy;
-import com.t2wonderland.kurona.Objects.Kurona;
 import com.t2wonderland.kurona.Objects.Rock;
 
 public class World {
@@ -17,7 +17,9 @@ public class World {
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
 	public static final int WORLD_STATE_GAME_OVER = 2;
 
-	public final Kurona kurona;
+	private CharacterFactory _characterFactory;
+	public final ICharacterObject _character;
+
 	public final Rock rock;
 	public final ArrayList<IStaticObject> candys;
 	public static Vector2 acel = new Vector2(1f, 0f);
@@ -28,10 +30,15 @@ public class World {
 	public int state;
 
 	public World (WorldListener listener) {
-		this.kurona = new Kurona(1, 1);
+		this._characterFactory = new CharacterFactory();
+
+		// 外部からキャクター選択情報をもらってFactoryに渡す
+		this._character = _characterFactory.createCharacter();
+
 		this.rock = new Rock();
 		this.rock.setInitialPosition(10,1);
 		this.candys = new ArrayList();
+
 		this.listener = listener;
 		rand = new Random();
 		generateLevel();
@@ -56,7 +63,7 @@ public class World {
 	}
 
 	private void updateKurona (float deltaTime, Vector2 accel) {
-		kurona.update(deltaTime, accel);
+		_character.updatePosition(deltaTime, accel);
 	}
 
 	private void checkCollisions () {
@@ -65,11 +72,11 @@ public class World {
 	}
 
 	private void checkRockCollisions () {
-		if (OverlapChecker.overlapRectangles(kurona.bounds, rock.getBounds())){
-			kurona.hitRock();
+		if (OverlapChecker.overlapRectangles(_character.getBounds(), rock.getBounds())){
+			_character.hitBarricade();
 		}
 		else{
-			kurona.releaseBlock();
+			_character.releaseBarricade();
 		}
 	}
 
@@ -77,7 +84,7 @@ public class World {
 		int len = candys.size();
 		for (int counter = 0; counter < len; counter++) {
 			IStaticObject candy = candys.get(counter);
-			if (OverlapChecker.overlapRectangles(kurona.bounds, candy.getBounds())) {
+			if (OverlapChecker.overlapRectangles(_character.getBounds(), candy.getBounds())) {
 				candys.remove(candy);
 				len = candys.size();
 				listener.food();

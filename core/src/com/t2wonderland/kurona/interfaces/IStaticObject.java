@@ -8,8 +8,11 @@ public interface IStaticObject {
     // 初期位置を設定する
     void setInitialPosition(float x, float y);
 
-    // サイズ、位置、領域など描画に必要な情報をもらう
-    Vector2 getSize();
+    // 位置の設定と取得
+    void setPosition(Vector2 position);
     Vector2 getPosition();
+
+    // サイズ、領域など描画に必要な情報を取得する
+    Vector2 getSize();
     Rectangle getBounds();
 }

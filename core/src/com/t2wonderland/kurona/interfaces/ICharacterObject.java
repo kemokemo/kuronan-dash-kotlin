@@ -9,6 +9,7 @@ public interface ICharacterObject extends IStaticObject {
 
     // キャラクターのステータスを取得する
     CharacterState getCharacterState();
+    float getStateTime();
 
     // 障害物への衝突と開放
     void hitBarricade();

@@ -54,7 +54,6 @@ public class GameScreen implements Screen {
 	public void draw (float deltaTime) {
 		_renderer.render();
 
-        // UI���i��`��
 		_camera.update();
         _batcher.setProjectionMatrix(_camera.combined);
         _batcher.enableBlending();
