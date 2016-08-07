@@ -11,7 +11,7 @@ import com.badlogic.gdx.Gdx;
 public class Settings {
 	public static boolean soundEnabled = true;
 	// hich score
-	public final static int[] highscores = new int[] {100, 80, 50, 30, 10};
+	public final static int[] highScores = new int[] {100, 80, 50, 30, 10};
 	public final static String file = ".kuronandash";
 
 	public static void load () {
@@ -20,14 +20,15 @@ public class Settings {
 			in = new BufferedReader(new InputStreamReader(Gdx.files.external(file).read()));
 			soundEnabled = Boolean.parseBoolean(in.readLine());
 			for (int i = 0; i < 5; i++) {
-				highscores[i] = Integer.parseInt(in.readLine());
+				highScores[i] = Integer.parseInt(in.readLine());
 			}
 		} catch (Throwable e) {
-			// :( It's ok we have defaults
+			// TODO: ログ記録
 		} finally {
 			try {
 				if (in != null) in.close();
 			} catch (IOException e) {
+				// TODO: ログ記録
 			}
 		}
 	}
@@ -38,24 +39,26 @@ public class Settings {
 			out = new BufferedWriter(new OutputStreamWriter(Gdx.files.external(file).write(false)));
 			out.write(Boolean.toString(soundEnabled));
 			for (int i = 0; i < 5; i++) {
-				out.write(Integer.toString(highscores[i]));
+				out.write(Integer.toString(highScores[i]));
 			}
 
 		} catch (Throwable e) {
+			// TODO: ログ記録
 		} finally {
 			try {
 				if (out != null) out.close();
 			} catch (IOException e) {
+				// TODO: ログ記録
 			}
 		}
 	}
 
 	public static void addScore (int score) {
 		for (int i = 0; i < 5; i++) {
-			if (highscores[i] < score) {
+			if (highScores[i] < score) {
 				for (int j = 4; j > i; j--)
-					highscores[j] = highscores[j - 1];
-				highscores[i] = score;
+					highScores[j] = highScores[j - 1];
+				highScores[i] = score;
 				break;
 			}
 		}
