@@ -4,11 +4,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.t2wonderland.kurona.screens.TitleScreen;
 
 public class KuronanDash extends Game {
 	
-	SpriteBatch batch;
-    BitmapFont font;
+	public SpriteBatch batch;
+    public BitmapFont font;
 	public static int displayWidth, displayHeight;
     
     ShapeRenderer renderer;
