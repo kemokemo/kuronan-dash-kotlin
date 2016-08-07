@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.t2wonderland.kurona.Assets;
 import com.t2wonderland.kurona.Interfaces.CharacterState;
 import com.t2wonderland.kurona.Interfaces.IStaticObject;
-import com.t2wonderland.kurona.Objects.Kurona;
 
 public class WorldRenderer {
 
@@ -27,9 +26,9 @@ public class WorldRenderer {
 		this.batch = batch;
 		
 		// initialize the camera
-		this.camera = new OrthographicCamera(World.WIDTH, World.HEIGHT);
-		this.camera.setToOrtho(false, World.WIDTH, World.HEIGHT);
-		viewport = new FitViewport(World.WIDTH, World.HEIGHT, camera);
+		this.camera = new OrthographicCamera(World.Companion.getWIDTH(), World.Companion.getHEIGHT());
+		this.camera.setToOrtho(false, World.Companion.getWIDTH(), World.Companion.getHEIGHT());
+		viewport = new FitViewport(World.Companion.getWIDTH(), World.Companion.getHEIGHT(), camera);
 		pos = new Vector2();
 	}
 	
@@ -37,7 +36,7 @@ public class WorldRenderer {
 		Gdx.gl.glClearColor(0, 0.3f, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		Vector2 position = world._character.getPosition();
+		Vector2 position = world.get_character().getPosition();
 		if (position.x > camera.position.x) {
 			camera.position.x = position.x;
 		}
@@ -66,11 +65,11 @@ public class WorldRenderer {
 	private void renderCharacter() {
 		TextureRegion keyFrame = updateKeyFrame();
 
-		Vector2 position = world._character.getPosition();
+		Vector2 position = world.get_character().getPosition();
 		position = updatePositionFromUserInput(position);
-		world._character.setPosition(position);
+		world.get_character().setPosition(position);
 
-		Vector2 size = world._character.getSize();
+		Vector2 size = world.get_character().getSize();
 		batch.draw(keyFrame, position.x, position.y, size.x, size.y);
 	}
 
@@ -99,10 +98,9 @@ public class WorldRenderer {
 
 	private TextureRegion updateKeyFrame() {
 		TextureRegion keyFrame;
-		CharacterState state = world._character.getCharacterState();
-		float stateTime = world._character.getStateTime();
+		CharacterState state = world.get_character().getCharacterState();
+		float stateTime = world.get_character().getStateTime();
 		switch (state) {
-			case Hit:
 			case Slow:
 			case Special:
 			case Dash:
@@ -117,16 +115,17 @@ public class WorldRenderer {
 	}
 
 	private void renderPlatforms () {
+        // TODO: 地面とかの構成要素を描画
 	}
 	
 	private void renderItems () {
-		Vector2 position = world.rock.getPosition();
-		Vector2 size = world.rock.getSize();
+		Vector2 position = world.getBarricade().getPosition();
+		Vector2 size = world.getBarricade().getSize();
 		batch.draw(Assets.gameRock, position.x, position.y, size.x, size.y);
 
-		int len = world.candys.size();
+		int len = world.getItemList().size();
 		for (int counter = 0; counter < len; counter++) {
-			IStaticObject candy = world.candys.get(counter);
+			IStaticObject candy = world.getItemList().get(counter);
 			Vector2 candyPosition = candy.getPosition();
 			Vector2 candySize = candy.getSize();
 			batch.draw(Assets.gameCandy, candyPosition.x, candyPosition.y, candySize.x, candySize.y);
@@ -134,5 +133,6 @@ public class WorldRenderer {
 	}
 	
 	private void renderGoal () {
+        // TODO: ゴールを描画
 	}
 }

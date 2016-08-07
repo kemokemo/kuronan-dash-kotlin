@@ -48,7 +48,7 @@ public class GameScreen implements Screen {
 	}
 	
 	private void updateRunning (float deltaTime) {
-		_world.update(deltaTime, World.acel);
+		_world.update(deltaTime, World.Companion.getAcceleration());
 	}
 	
 	public void draw (float deltaTime) {
@@ -77,32 +77,27 @@ public class GameScreen implements Screen {
 	}
 
 	private void presentReady () {
-		//batcher.draw(Assets.ready, 160 - 192 / 2, 240 - 32 / 2, 192, 32);
+		// TODO: ゲーム開始前のReady画面表示
 	}
 
 	private void presentRunning () {
-		//batcher.draw(Assets.pause, 320 - 64, 480 - 64, 64, 64);
-		//Assets.font.draw(batcher, scoreString, 16, 480 - 20);
+		// TODO: ゲーム中の画面表示
+		// 必要に応じて一時停止ボタンやスコアを表示する
 	}
 
 	private void presentPaused () {
-		//batcher.draw(Assets.pauseMenu, 160 - 192 / 2, 240 - 96 / 2, 192, 96);
-		//Assets.font.draw(batcher, scoreString, 16, 480 - 20);
+		// TODO: 一時停止中の画面表示
+		// ゲーム再開ボタンやゲームを中断してタイトルに戻るボタンあると良いかも
 	}
 
 	private void presentLevelEnd () {
-		//String topText = "the princess is ...";
-		//String bottomText = "in another castle!";
-		//float topWidth = Assets.font.getBounds(topText).width;
-		//float bottomWidth = Assets.font.getBounds(bottomText).width;
-		//Assets.font.draw(batcher, topText, 160 - topWidth / 2, 480 - 40);
-		//Assets.font.draw(batcher, bottomText, 160 - bottomWidth / 2, 40);
+		// TODO: 全クリア時の表示
+		// 豪華にやるなら別画面でアドベンチャー風にしたいなぁ
 	}
 
 	private void presentGameOver () {
-		//batcher.draw(Assets.gameOver, 160 - 160 / 2, 240 - 96 / 2, 160, 96);
-		//float scoreWidth = Assets.font.getBounds(scoreString).width;
-		//Assets.font.draw(batcher, scoreString, 160 - scoreWidth / 2, 480 - 20);
+		// TODO: ゲームオーバー画面の表示
+		// スコア表示したりタイトルに戻るボタンあっても良いかも
 	}
 	
 	@Override
@@ -121,14 +116,18 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void hide() {
+		// TODO: 最小化された時の処理
+		pause();
 	}
 
 	@Override
 	public void pause() {
+		// TODO: 一時停止した時の処理
 	}
 
 	@Override
 	public void resume() {
+		// TODO: 再開時の処理
 	}
 
 	@Override

@@ -6,17 +6,17 @@ import com.t2wonderland.kurona.Interfaces.IStaticObject
 
 class Candy : IStaticObject {
 
-    private var WIDTH = 1f
-    private var HEIGHT = 1f
+    private var _width = 1f
+    private var _height = 1f
 
     var _position: Vector2 = Vector2()
     var _bounds: Rectangle = Rectangle()
-    var _size : Vector2 = Vector2(WIDTH, HEIGHT)
+    var _size : Vector2 = Vector2(_width, _height)
 
     override fun setInitialPosition(x: Float, y: Float) {
         this._position.x = x
         this._position.y = y
-        this._bounds = Rectangle(x - WIDTH / 2, y - HEIGHT / 2, WIDTH, HEIGHT)
+        this._bounds = Rectangle(x - _width / 2, y - _height / 2, _width, _height)
     }
 
     override fun getSize(): Vector2 {

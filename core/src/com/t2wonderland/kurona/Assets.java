@@ -81,7 +81,7 @@ public class Assets {
 		gameCandy = gameAtlas.findRegion("candy-normal");
 		Texture bgImg = new Texture("bgSmall.png");
 		bgImg.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-		gameBack = new Sprite(bgImg, 0,0, World.WIDTH*20, World.HEIGHT);
+		gameBack = new Sprite(bgImg, 0,0, World.Companion.getWIDTH() *20, World.Companion.getHEIGHT());
 		gameBack.setU(0);
 		gameBack.setU2(20);
 		gameBack.setV(0);
