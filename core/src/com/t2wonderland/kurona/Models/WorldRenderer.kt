@@ -61,13 +61,11 @@ World) {
     }
 
     private fun renderCharacter() {
-        val keyFrame = updateKeyFrame()
-
         val position = world._character.position
         position.y = getHeightFromUserInput() ?: position.y
 
         val size = world._character.size
-        batch.draw(keyFrame, position.x, position.y, size.x, size.y)
+        batch.draw(world._character.image, position.x, position.y, size.x, size.y)
     }
 
     private fun getHeightFromUserInput(): Float? {
@@ -80,36 +78,21 @@ World) {
         return null
     }
 
-    private fun updateKeyFrame(): TextureRegion {
-        val keyFrame: TextureRegion
-        val state = world._character.characterState
-        val stateTime = world._character.stateTime
-        when (state) {
-            CharacterState.Slow, CharacterState.Special, CharacterState.Dash -> keyFrame = Assets.kuronaRun.getKeyFrame(stateTime, true)
-
-            else -> keyFrame = Assets.kuronaRun.getKeyFrame(stateTime, true)
-        }
-
-        return keyFrame
-    }
-
     private fun renderPlatforms() {
         // TODO: 地面とかの構成要素を描画
     }
 
     private fun renderBarricades() {
         for (barricade in world.barricadeList){
-            val position = barricade.position
-            val size = barricade.size
-            batch.draw(Assets.gameRock, position.x, position.y, size.x, size.y)
+            batch.draw(barricade.image, barricade.position.x, barricade.position.y,
+                    barricade.size.x, barricade.size.y)
         }
     }
 
     private fun renderItems() {
         for (item in world.itemList) {
-            val position = item.position
-            val size = item.size
-            batch.draw(Assets.gameCandy, position.x, position.y, size.x, size.y)
+            batch.draw(item.image, item.position.x, item.position.y,
+                    item.size.x, item.size.y)
         }
     }
 

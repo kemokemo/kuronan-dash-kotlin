@@ -1,7 +1,9 @@
 package com.t2wonderland.kurona.Objects
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
+import com.t2wonderland.kurona.Assets
 import com.t2wonderland.kurona.Interfaces.CharacterState
 import com.t2wonderland.kurona.Interfaces.ICharacterObject
 
@@ -11,28 +13,28 @@ class Kurona : ICharacterObject {
     private val VELOCITY_SLOW = 2.5f
     private val VELOCITY_SP = 20f
 
-    private val WIDTH = 2f
-    private val HEIGHT = 2f
+    val WIDTH = 2f
+    val HEIGHT = 2f
+    val _maxVelocityX: Float
+    val _maxVelocityY: Float
 
-    override val size = Vector2(WIDTH, HEIGHT)
-    override var position: Vector2 = Vector2()
-    override var bounds: Rectangle = Rectangle()
-        private set
-    private val _velocity: Vector2
-    override var characterState: CharacterState = CharacterState.Dash
+    override var characterState: CharacterState = CharacterState.Slow
         private set
     override var stateTime: Float = 0.toFloat()
         private set
-    private val _maxVelocityX: Float
-    private val _maxVelocityY: Float
+
+    override var position: Vector2 = Vector2()
+    override val size = Vector2(WIDTH, HEIGHT)
+    override val bounds: Rectangle = Rectangle()
+    override var image: TextureRegion = Assets.kuronaRun.getKeyFrame(stateTime, true)
+        get() = Assets.kuronaRun.getKeyFrame(stateTime, true)
+        private set
+
+    private val _velocity: Vector2
 
     init {
-        characterState = CharacterState.Slow
-        stateTime = 0f
-
-        // starting at the slow mode
         _velocity = Vector2()
-        _velocity.x = VELOCITY_SLOW
+        _velocity.x = VELOCITY_DASH
         _maxVelocityX = VELOCITY_DASH
         _maxVelocityY = VELOCITY_DASH
     }
