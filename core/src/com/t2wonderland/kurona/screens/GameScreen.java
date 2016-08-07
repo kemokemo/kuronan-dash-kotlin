@@ -5,50 +5,35 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.t2wonderland.kurona.*;
 import com.t2wonderland.kurona.models.World;
-import com.t2wonderland.kurona.models.World.WorldListener;
 import com.t2wonderland.kurona.models.WorldRenderer;
+import com.t2wonderland.kurona.models.WorldListener;
 
 public class GameScreen implements Screen {
-	static final int GAME_READY = 0;
-	static final int GAME_RUNNING = 1;
-	static final int GAME_PAUSED = 2;
-	static final int GAME_LEVEL_END = 3;
-	static final int GAME_OVER = 4;
 
-	int state;
+	World.Game_State _state;
 
-	final KuronanDash game;
-	OrthographicCamera camera;
-	SpriteBatch batcher;
-	World world;
-	WorldListener worldListener;
-	WorldRenderer renderer;
-	int lastScore;
-	String scoreString;
+	final KuronanDash _game;
+	OrthographicCamera _camera;
+	SpriteBatch _batcher;
+
+	World _world;
+	WorldListener _worldListener;
+	WorldRenderer _renderer;
+
+	int _lastScore;
+	String _scoreString;
 	
 	public GameScreen(final KuronanDash game){
-		this.game = game;
-		camera = new OrthographicCamera(KuronanDash.displayWidth, KuronanDash.displayHeight);
-		camera.setToOrtho(false, KuronanDash.displayWidth, KuronanDash.displayHeight);
-		state = GAME_READY;
-        batcher = new SpriteBatch();
-        worldListener = new WorldListener() {
-			@Override
-			public void sp () {
-				// 技発動サウンド
-				Assets.playSound(Assets.spSound);
-			}
-
-			@Override
-			public void food () {
-				// 食べ物たべるサウンド
-				Assets.playSound(Assets.foodSound);
-			}
-		};
-		world = new World(worldListener);
-		renderer = new WorldRenderer(batcher, world);
-		lastScore = 0;
-		scoreString = "SCORE: 0";
+		this._game = game;
+		_camera = new OrthographicCamera(KuronanDash.displayWidth, KuronanDash.displayHeight);
+		_camera.setToOrtho(false, KuronanDash.displayWidth, KuronanDash.displayHeight);
+		_state = World.Game_State.Running;
+        _batcher = new SpriteBatch();
+        _worldListener = new WorldListener();
+		_world = new World(_worldListener);
+		_renderer = new WorldRenderer(_batcher, _world);
+		_lastScore = 0;
+		_scoreString = "SCORE: 0";
 		
 		if (Settings.soundEnabled) {
 			Assets.titleMusic.stop();
@@ -62,34 +47,34 @@ public class GameScreen implements Screen {
 	}
 	
 	private void updateRunning (float deltaTime) {
-		world.update(deltaTime, World.acel);
+		_world.update(deltaTime, World.acel);
 
 		// 点数を更新
 	}
 	
 	public void draw (float deltaTime) {
-		renderer.render();
+		_renderer.render();
 
         // UI部品を描画
-		camera.update();
-        batcher.setProjectionMatrix(camera.combined);
-        batcher.enableBlending();
-		switch (state) {
-		case GAME_READY:
-			presentReady();
-			break;
-		case GAME_RUNNING:
-			presentRunning();
-			break;
-		case GAME_PAUSED:
-			presentPaused();
-			break;
-		case GAME_LEVEL_END:
-			presentLevelEnd();
-			break;
-		case GAME_OVER:
-			presentGameOver();
-			break;
+		_camera.update();
+        _batcher.setProjectionMatrix(_camera.combined);
+        _batcher.enableBlending();
+		switch (_state) {
+			case Ready:
+				presentReady();
+				break;
+			case Running:
+				presentRunning();
+				break;
+			case Paused:
+				presentPaused();
+				break;
+			case LevelEnd:
+				presentLevelEnd();
+				break;
+			case GameOver:
+				presentGameOver();
+				break;
 		}
 	}
 

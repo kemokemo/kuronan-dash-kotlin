@@ -19,17 +19,17 @@ public class TitleScreen implements Screen {
 	Rectangle tutorialBounds;
 	Rectangle exitBounds;
 
-	public TitleScreen(final KuronanDash gam)
+	public TitleScreen(final KuronanDash game)
 	{
-		game = gam;
-		camera = new OrthographicCamera(KuronanDash.displayWidth, KuronanDash.displayHeight);
-		camera.setToOrtho(false, KuronanDash.displayWidth, KuronanDash.displayHeight);
+		this.game = game;
+		this.camera = new OrthographicCamera(KuronanDash.displayWidth, KuronanDash.displayHeight);
+		this.camera.setToOrtho(false, KuronanDash.displayWidth, KuronanDash.displayHeight);
 
 		// regions of the buttons
-		startBounds = Assets.titleStart.getBoundingRectangle();
-		scoresBounds = Assets.titleScore.getBoundingRectangle();
-		tutorialBounds = Assets.titleTutorial.getBoundingRectangle();
-		exitBounds = Assets.titleExit.getBoundingRectangle();
+		this.startBounds = Assets.titleStart.getBoundingRectangle();
+		this.scoresBounds = Assets.titleScore.getBoundingRectangle();
+		this.tutorialBounds = Assets.titleTutorial.getBoundingRectangle();
+		this.exitBounds = Assets.titleExit.getBoundingRectangle();
 	}
 	
 	public void update (float deltaTime) {

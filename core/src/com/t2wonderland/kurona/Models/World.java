@@ -1,20 +1,21 @@
 package com.t2wonderland.kurona.models;
 
 import com.badlogic.gdx.math.Vector2;
+import java.util.ArrayList;
+import java.util.Random;
+
 import com.t2wonderland.kurona.objects.Candy;
 import com.t2wonderland.kurona.objects.Kurona;
 import com.t2wonderland.kurona.objects.Rock;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 public class World {
-	// play sound
-	public interface WorldListener {
-		void sp ();
-		void food ();
+	public enum Game_State{
+		Ready,
+		Running,
+		Paused,
+		LevelEnd,
+		GameOver
 	}
-
 	// 800*480がターゲット解像度で、32*32を1マスとすると25*15マス
 	public static final int WIDTH = 25;
 	public static final int HEIGHT = 15;
