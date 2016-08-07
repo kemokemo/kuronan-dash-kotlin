@@ -25,14 +25,15 @@ public class World {
 		public void food ();
 	}
 
-	// 800/32=25 is the width of the window.
-	public static final float WORLD_WIDTH = 25;
-	public static final float WORLD_HEIGHT = 15;
+	// 800*480がターゲット解像度で、32*32を1マスとすると25*15マス
+	public static final float WIDTH = 25;
+	public static final float HEIGHT = 15;
 	public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
 	public static final int WORLD_STATE_GAME_OVER = 2;
 
 	public final Kurona kurona;
+	public final Rock rock;
 	public static Vector2 acel = new Vector2(1f, 0);
 	public final WorldListener listener;
 
@@ -41,6 +42,7 @@ public class World {
 
 	public World (WorldListener listener) {
 		this.kurona = new Kurona(1, 1);
+		this.rock = new Rock(10,1);
 		this.listener = listener;
 		generateLevel();
 
@@ -53,8 +55,14 @@ public class World {
 	}
 
 	public void update (float deltaTime, float accelX) {
+
+		if (checkCollisions()){
+			kurona.hitBlock();
+		}
+		else{
+			kurona.releaseBlock();
+		}
 		updateKurona(deltaTime, accelX);
-		if (kurona.state != Kurona.STATE_HIT) checkCollisions();
 		checkGameOver();
 	}
 
@@ -62,8 +70,8 @@ public class World {
 		kurona.update(deltaTime);
 	}
 
-	private void checkCollisions () {
-		// check colision
+	private boolean checkCollisions () {
+		return OverlapTester.overlapRectangles(kurona.bounds, rock.bounds);
 	}
 
 	private void checkGameOver () {

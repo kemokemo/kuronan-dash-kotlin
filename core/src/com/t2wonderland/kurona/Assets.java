@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Animation;
 
 public class Assets {
 	// title
@@ -22,6 +23,7 @@ public class Assets {
 	public static TextureRegion[] runFrames = new TextureRegion[3];
 	public static Animation kuronaRun;
 	public static Sprite gameBack;
+	public static TextureRegion gameRock;
 	public static Music gameMusic;
 
 	public static void load() {
@@ -68,6 +70,7 @@ public class Assets {
 			runFrames[i] = gameAtlas.findRegion( (i+1) + " - kurona-run");
 		}
 		kuronaRun = new Animation(0.1f, runFrames);
+		gameRock = gameAtlas.findRegion("rock-normal");
 		Texture bgImg = new Texture("bgSmall.png");
 		// ゲーム画面の背景を画像20枚分のステージにする
 		bgImg.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);

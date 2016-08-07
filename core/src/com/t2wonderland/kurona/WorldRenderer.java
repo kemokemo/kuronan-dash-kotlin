@@ -9,8 +9,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class WorldRenderer {
-	static final float FRUSTUM_WIDTH = 25; // 800/32=25
-	static final float FRUSTUM_HEIGHT = 15; // 480/32=15
+
 	World world;
 	OrthographicCamera camera;
 	SpriteBatch batch;
@@ -21,9 +20,9 @@ public class WorldRenderer {
 		this.batch = batch;
 		
 		// initialize the camera
-		this.camera = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-		this.camera.setToOrtho(false, FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-		viewport = new FitViewport(FRUSTUM_WIDTH, FRUSTUM_HEIGHT, camera);
+		this.camera = new OrthographicCamera(World.WIDTH, World.HEIGHT);
+		this.camera.setToOrtho(false, World.WIDTH, World.HEIGHT);
+		viewport = new FitViewport(World.WIDTH, World.HEIGHT, camera);
 	}
 	
 	public void render () {
@@ -58,27 +57,27 @@ public class WorldRenderer {
 		TextureRegion keyFrame;
 		switch (world.kurona.state) {
 		case Kurona.STATE_HIT:
-			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime ,Animation.ANIMATION_LOOPING);
+			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
 			break;
 		case Kurona.STATE_SLOW:
-			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime ,Animation.ANIMATION_LOOPING);
+			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
 			break;
 		case Kurona.STATE_SP:
-			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime ,Animation.ANIMATION_LOOPING);
+			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
 			break;
 		case Kurona.STATE_DASH:
 		default:
-			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime ,Animation.ANIMATION_LOOPING);
+			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime, true);
 		}
 
-
-		batch.draw(keyFrame, world.kurona.position.x, world.kurona.position.y, world.kurona.WIDTH, world.kurona.HEIGHT);
+		batch.draw(keyFrame, world.kurona.position.x, world.kurona.position.y, Kurona.WIDTH, Kurona.HEIGHT);
 	}
 	
 	private void renderPlatforms () {
 	}
 	
 	private void renderItems () {
+		batch.draw(Assets.gameRock, world.rock.position.x, world.rock.position.y, Rock.WIDTH, Rock.HEIGHT);
 	}
 	
 	private void renderGoal () {

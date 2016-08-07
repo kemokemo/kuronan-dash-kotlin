@@ -5,9 +5,9 @@ public class Kurona extends DynamicGameObject {
 	public static final int STATE_HIT = 1;
 	public static final int STATE_SLOW = 2;
 	public static final int STATE_SP = 3;
-	public static final float VELOCITY_DASH = 5;
+	public static final float VELOCITY_DASH = 10f;
 	public static final float VELOCITY_SLOW = 2.5f;
-	public static final float VELOCITY_SP = 10;
+	public static final float VELOCITY_SP = 20f;
 	public static final float WIDTH = 2f;
 	public static final float HEIGHT = 2f;
 
@@ -21,8 +21,8 @@ public class Kurona extends DynamicGameObject {
 		// starting at the slow mode
 		velocity.x = VELOCITY_SLOW;
 		stateTime = 0;
-		maxVelX = 10f;
-		maxVelY = 10f;
+		maxVelX = VELOCITY_DASH;
+		maxVelY = VELOCITY_DASH;
 	}
 	
 	public void update (float deltaTime) {
@@ -48,13 +48,24 @@ public class Kurona extends DynamicGameObject {
 		bounds.y = position.y - bounds.height / 2;
 		
 		// update status
-		stateTime += deltaTime;
+		if (state == STATE_SLOW){
+			// SLOWモードでは描画もアニメーションもゆっくりにしたいので、経過時間を半分にする
+			stateTime += deltaTime/2;
+		}
+		else{
+			stateTime += deltaTime;
+		}
 	}
 	
 	// hit
 	public void hitBlock () {
 		velocity.x = VELOCITY_SLOW;
 		state = STATE_SLOW;
-		stateTime = 0;
+	}
+
+	// Release
+	public void releaseBlock(){
+		velocity.x = VELOCITY_DASH;
+		state = STATE_DASH;
 	}
 }
