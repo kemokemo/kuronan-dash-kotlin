@@ -18,6 +18,10 @@ package com.t2wonderland.kurona;
 
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class World {
 	// play sound
 	public interface WorldListener {
@@ -34,9 +38,10 @@ public class World {
 
 	public final Kurona kurona;
 	public final Rock rock;
-	public final Candy candy;
+	public final List<Candy> candys;
 	public static Vector2 acel = new Vector2(1f, 0f);
 	public final WorldListener listener;
+	public final Random rand;
 
 	public int score;
 	public int state;
@@ -44,8 +49,9 @@ public class World {
 	public World (WorldListener listener) {
 		this.kurona = new Kurona(1, 1);
 		this.rock = new Rock(10,1);
-		this.candy = new Candy(20,1);
+		this.candys = new ArrayList<Candy>();
 		this.listener = listener;
+		rand = new Random();
 		generateLevel();
 
 		this.score = 0;
@@ -54,6 +60,10 @@ public class World {
 
 	private void generateLevel () {
 		// settings of the level
+		while (candys.size() < 10){
+				Candy candy = new Candy(WIDTH*20*rand.nextFloat(), 1);
+				candys.add(candy);
+		}
 	}
 
 	public void update (float deltaTime, Vector2 accel) {
@@ -81,8 +91,15 @@ public class World {
 	}
 
 	private void checkCandyCollisions(){
-		if (OverlapTester.overlapRectangles(kurona.bounds, candy.bounds)){
-			listener.food();
+		int len = candys.size();
+		for (int counter = 0; counter < len; counter++) {
+			Candy candy = candys.get(counter);
+			if (OverlapTester.overlapRectangles(kurona.bounds, candy.bounds)) {
+				candys.remove(candy);
+				len = candys.size();
+				listener.food();
+			}
+
 		}
 	}
 

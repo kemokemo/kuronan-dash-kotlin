@@ -78,7 +78,12 @@ public class WorldRenderer {
 	
 	private void renderItems () {
 		batch.draw(Assets.gameRock, world.rock.position.x, world.rock.position.y, Rock.WIDTH, Rock.HEIGHT);
-		batch.draw(Assets.gameCandy, world.candy.position.x, world.candy.position.y, Candy.WIDTH, Candy.HEIGHT);
+
+		int len = world.candys.size();
+		for (int counter = 0; counter < len; counter++) {
+			Candy candy = world.candys.get(counter);
+			batch.draw(Assets.gameCandy, candy.position.x, candy.position.y, Candy.WIDTH, Candy.HEIGHT);
+		}
 	}
 	
 	private void renderGoal () {
