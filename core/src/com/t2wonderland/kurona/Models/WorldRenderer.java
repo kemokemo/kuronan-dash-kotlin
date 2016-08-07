@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.t2wonderland.kurona.Assets;
-import com.t2wonderland.kurona.Interfaces.IGameObject;
+import com.t2wonderland.kurona.Interfaces.IStaticObject;
 import com.t2wonderland.kurona.Objects.Kurona;
 
 public class WorldRenderer {
@@ -109,7 +109,7 @@ public class WorldRenderer {
 
 		int len = world.candys.size();
 		for (int counter = 0; counter < len; counter++) {
-			IGameObject candy = world.candys.get(counter);
+			IStaticObject candy = world.candys.get(counter);
 			Vector2 candyPosition = candy.getPosition();
 			Vector2 candySize = candy.getSize();
 			batch.draw(Assets.gameCandy, candyPosition.x, candyPosition.y, candySize.x, candySize.y);

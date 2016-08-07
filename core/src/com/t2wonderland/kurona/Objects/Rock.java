@@ -2,9 +2,9 @@ package com.t2wonderland.kurona.Objects;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.t2wonderland.kurona.Interfaces.IGameObject;
+import com.t2wonderland.kurona.Interfaces.IStaticObject;
 
-public class Rock implements IGameObject{
+public class Rock implements IStaticObject {
 
     private float WIDTH = 1f;
     float HEIGHT = 1f;

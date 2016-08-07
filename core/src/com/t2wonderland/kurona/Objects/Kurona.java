@@ -52,7 +52,6 @@ public class Kurona extends DynamicGameObject {
 		
 		// update status
 		if (state == STATE_SLOW){
-			// SLOW���[�h�ł͕`����A�j���[�V�������������ɂ������̂ŁA�o�ߎ��Ԃ𔼕��ɂ���
 			stateTime += deltaTime/2;
 		}
 		else{

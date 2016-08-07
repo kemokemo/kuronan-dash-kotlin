@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.t2wonderland.kurona.Interfaces.IGameObject;
+import com.t2wonderland.kurona.Interfaces.IStaticObject;
 import com.t2wonderland.kurona.Objects.Candy;
 import com.t2wonderland.kurona.Objects.Kurona;
 import com.t2wonderland.kurona.Objects.Rock;
@@ -19,7 +19,7 @@ public class World {
 
 	public final Kurona kurona;
 	public final Rock rock;
-	public final ArrayList<IGameObject> candys;
+	public final ArrayList<IStaticObject> candys;
 	public static Vector2 acel = new Vector2(1f, 0f);
 	public final WorldListener listener;
 	public final Random rand;
@@ -76,7 +76,7 @@ public class World {
 	private void checkCandyCollisions(){
 		int len = candys.size();
 		for (int counter = 0; counter < len; counter++) {
-			IGameObject candy = candys.get(counter);
+			IStaticObject candy = candys.get(counter);
 			if (OverlapChecker.overlapRectangles(kurona.bounds, candy.getBounds())) {
 				candys.remove(candy);
 				len = candys.size();
