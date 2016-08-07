@@ -1,25 +1,25 @@
 package com.t2wonderland.kurona;
 
 public class Kurona extends DynamicGameObject {
-	public static final int KURONA_STATE_DASH = 0;
-	public static final int KURONA_STATE_HIT= 1;
-	public static final int KURONA_STATE_SLOW = 2;
-	public static final int KURONA_STATE_SP = 3;
-	public static final float KURONA_DASH_VELOCITY = 5;
-	public static final float KURONA_SLOW_VELOCITY = 2.5f;
-	public static final float KURONA_SP_VELOCITY = 10;
-	public static final float KURONA_WIDTH = 100f;
-	public static final float KURONA_HEIGHT = 100f;
+	public static final int STATE_DASH = 0;
+	public static final int STATE_HIT = 1;
+	public static final int STATE_SLOW = 2;
+	public static final int STATE_SP = 3;
+	public static final float VELOCITY_DASH = 5;
+	public static final float VELOCITY_SLOW = 2.5f;
+	public static final float VELOCITY_SP = 10;
+	public static final float WIDTH = 2f;
+	public static final float HEIGHT = 2f;
 
 	int state;
 	float stateTime;
 	float maxVelX, maxVelY;
 	
 	public Kurona(float x, float y) {
-		super(x, y, KURONA_WIDTH, KURONA_HEIGHT);
-		state = KURONA_STATE_DASH;
+		super(x, y, WIDTH, HEIGHT);
+		state = STATE_DASH;
 		// starting at the slow mode
-		velocity.x = KURONA_SLOW_VELOCITY;
+		velocity.x = VELOCITY_SLOW;
 		stateTime = 0;
 		maxVelX = 10f;
 		maxVelY = 10f;
@@ -53,8 +53,8 @@ public class Kurona extends DynamicGameObject {
 	
 	// hit
 	public void hitBlock () {
-		velocity.x = KURONA_SLOW_VELOCITY;
-		state = KURONA_STATE_SLOW;
+		velocity.x = VELOCITY_SLOW;
+		state = STATE_SLOW;
 		stateTime = 0;
 	}
 }

@@ -54,7 +54,7 @@ public class World {
 
 	public void update (float deltaTime, float accelX) {
 		updateKurona(deltaTime, accelX);
-		if (kurona.state != Kurona.KURONA_STATE_HIT) checkCollisions();
+		if (kurona.state != Kurona.STATE_HIT) checkCollisions();
 		checkGameOver();
 	}
 

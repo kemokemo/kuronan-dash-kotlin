@@ -1,7 +1,6 @@
 package com.t2wonderland.kurona;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -58,21 +57,22 @@ public class WorldRenderer {
 	private void renderKurona () {
 		TextureRegion keyFrame;
 		switch (world.kurona.state) {
-		case Kurona.KURONA_STATE_HIT:
-			keyFrame = Assets.kuronaWalk.getKeyFrame(world.kurona.stateTime ,Animation.ANIMATION_LOOPING);
+		case Kurona.STATE_HIT:
+			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime ,Animation.ANIMATION_LOOPING);
 			break;
-		case Kurona.KURONA_STATE_SLOW:
-			keyFrame = Assets.kuronaWalk.getKeyFrame(world.kurona.stateTime ,Animation.ANIMATION_LOOPING);
+		case Kurona.STATE_SLOW:
+			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime ,Animation.ANIMATION_LOOPING);
 			break;
-		case Kurona.KURONA_STATE_SP:
-			keyFrame = Assets.kuronaWalk.getKeyFrame(world.kurona.stateTime ,Animation.ANIMATION_LOOPING);
+		case Kurona.STATE_SP:
+			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime ,Animation.ANIMATION_LOOPING);
 			break;
-		case Kurona.KURONA_STATE_DASH:
+		case Kurona.STATE_DASH:
 		default:
-			keyFrame = Assets.kuronaWalk.getKeyFrame(world.kurona.stateTime ,Animation.ANIMATION_LOOPING);
+			keyFrame = Assets.kuronaRun.getKeyFrame(world.kurona.stateTime ,Animation.ANIMATION_LOOPING);
 		}
-		
-		batch.draw(keyFrame, world.kurona.position.x, world.kurona.position.y, 1, 1.5f);
+
+
+		batch.draw(keyFrame, world.kurona.position.x, world.kurona.position.y, world.kurona.WIDTH, world.kurona.HEIGHT);
 	}
 	
 	private void renderPlatforms () {

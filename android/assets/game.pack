@@ -3,45 +3,38 @@ game.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-gameKurona0002
+1 - kurona-run
   rotate: false
   xy: 1, 1
-  size: 32, 48
-  orig: 32, 48
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
-gameKurona0005
+3 - kurona-run
   rotate: false
   xy: 35, 1
-  size: 32, 48
-  orig: 32, 48
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
-gameKurona0004
+rock-normal
   rotate: false
   xy: 69, 1
-  size: 32, 48
-  orig: 32, 48
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
-gameKurona0003
+kurona-taiki
   rotate: false
   xy: 103, 1
-  size: 32, 48
-  orig: 32, 48
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
-gameKurona0000
+2 - kurona-run
   rotate: false
   xy: 137, 1
-  size: 32, 48
-  orig: 32, 48
-  offset: 0, 0
-  index: -1
-gameKurona0001
-  rotate: false
-  xy: 171, 1
-  size: 32, 48
-  orig: 32, 48
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1

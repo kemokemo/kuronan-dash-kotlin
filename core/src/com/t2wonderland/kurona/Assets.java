@@ -19,8 +19,8 @@ public class Assets {
 	public static Sprite selectKurona, selectKoma, selectShishimaru, selectDescription, selectBack, selectStart;
 	// game
 	public static TextureAtlas gameAtlas;
-	public static TextureRegion[] walkFrames = new TextureRegion[5];
-	public static Animation kuronaWalk;
+	public static TextureRegion[] runFrames = new TextureRegion[3];
+	public static Animation kuronaRun;
 	public static Sprite gameBack;
 	public static Music gameMusic;
 
@@ -64,13 +64,13 @@ public class Assets {
 
 		// game
 		gameAtlas = new TextureAtlas(Gdx.files.internal("game.pack"));
-		for (int i = 0; i < 5; i++) {
-			walkFrames[i] = gameAtlas.findRegion("gameKurona000" + i);
+		for (int i = 0; i < 3; i++) {
+			runFrames[i] = gameAtlas.findRegion( (i+1) + " - kurona-run");
 		}
-		kuronaWalk = new Animation(0.1f, walkFrames);
+		kuronaRun = new Animation(0.1f, runFrames);
 		Texture bgImg = new Texture("bgSmall.png");
+		// ゲーム画面の背景を画像20枚分のステージにする
 		bgImg.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-		// 画像20枚分のステージにする
 		gameBack = new Sprite(bgImg, 0,0, 25*20, 15);
 		gameBack.setU(0);
 		gameBack.setU2(20);
