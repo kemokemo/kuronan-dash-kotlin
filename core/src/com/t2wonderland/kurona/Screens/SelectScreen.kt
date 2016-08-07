@@ -8,26 +8,30 @@ import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector3
 import com.t2wonderland.kurona.Assets
 import com.t2wonderland.kurona.KuronanDash
+import com.t2wonderland.kurona.Models.CharacterSelect
 import com.t2wonderland.kurona.Models.OverlapChecker
 
 class SelectScreen(internal val game: KuronanDash) : Screen {
     internal var camera: OrthographicCamera
-    internal var kuronaBounds: Rectangle
-    internal var komaBounds: Rectangle
-    internal var shishimaruBounds: Rectangle
-    internal var backBounds: Rectangle
-    internal var startBounds: Rectangle
+    internal var boundsKurona: Rectangle
+    internal var boundsKoma: Rectangle
+    internal var boundsShishimaru: Rectangle
+    internal var boundsBack: Rectangle
+    internal var boundsStart: Rectangle
+    internal var selectedCharacter: CharacterSelect
 
     init {
         camera = OrthographicCamera(KuronanDash.displayWidth.toFloat(), KuronanDash.displayHeight.toFloat())
         camera.setToOrtho(false, KuronanDash.displayWidth.toFloat(), KuronanDash.displayHeight.toFloat())
 
         // regions of the buttons
-        kuronaBounds = Assets.selectKurona.boundingRectangle
-        komaBounds = Assets.selectKoma.boundingRectangle
-        shishimaruBounds = Assets.selectShishimaru.boundingRectangle
-        backBounds = Assets.selectBack.boundingRectangle
-        startBounds = Assets.selectStart.boundingRectangle
+        boundsKurona = Assets.selectKurona.boundingRectangle
+        boundsKoma = Assets.selectKoma.boundingRectangle
+        boundsShishimaru = Assets.selectShishimaru.boundingRectangle
+        boundsBack = Assets.selectBack.boundingRectangle
+        boundsStart = Assets.selectStart.boundingRectangle
+
+        selectedCharacter = CharacterSelect.Kurona
     }
 
     fun update(deltaTime: Float) {
@@ -36,26 +40,29 @@ class SelectScreen(internal val game: KuronanDash) : Screen {
             touchPos.set(Gdx.input.x.toFloat(), Gdx.input.y.toFloat(), 0f)
             camera.unproject(touchPos)
 
-            if (OverlapChecker.pointInRectangle(kuronaBounds, touchPos.x, touchPos.y)) {
+            if (OverlapChecker.pointInRectangle(boundsKurona, touchPos.x, touchPos.y)) {
                 Assets.playSound(Assets.clickSound)
+                selectedCharacter = CharacterSelect.Kurona
                 return
             }
-            if (OverlapChecker.pointInRectangle(komaBounds, touchPos.x, touchPos.y)) {
+            if (OverlapChecker.pointInRectangle(boundsKoma, touchPos.x, touchPos.y)) {
                 Assets.playSound(Assets.clickSound)
+                selectedCharacter = CharacterSelect.Koma
                 return
             }
-            if (OverlapChecker.pointInRectangle(shishimaruBounds, touchPos.x, touchPos.y)) {
+            if (OverlapChecker.pointInRectangle(boundsShishimaru, touchPos.x, touchPos.y)) {
                 Assets.playSound(Assets.clickSound)
+                selectedCharacter = CharacterSelect.Shishimaru
                 return
             }
-            if (OverlapChecker.pointInRectangle(backBounds, touchPos.x, touchPos.y)) {
+            if (OverlapChecker.pointInRectangle(boundsBack, touchPos.x, touchPos.y)) {
                 Assets.playSound(Assets.clickSound)
                 game.screen = TitleScreen(game)
                 return
             }
-            if (OverlapChecker.pointInRectangle(startBounds, touchPos.x, touchPos.y)) {
+            if (OverlapChecker.pointInRectangle(boundsStart, touchPos.x, touchPos.y)) {
                 Assets.playSound(Assets.clickSound)
-                game.screen = GameScreen(game)
+                game.screen = GameScreen(game, selectedCharacter)
                 return
             }
         }
@@ -66,6 +73,7 @@ class SelectScreen(internal val game: KuronanDash) : Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
         camera.update()
         game.batch.projectionMatrix = camera.combined
+
         game.batch.begin()
         Assets.selectKurona.draw(game.batch)
         Assets.selectKoma.draw(game.batch)

@@ -26,8 +26,8 @@ class Kurona : ICharacterObject {
     override var position: Vector2 = Vector2()
     override val size = Vector2(WIDTH, HEIGHT)
     override val bounds: Rectangle = Rectangle()
-    override var image: TextureRegion = Assets.kuronaRun.getKeyFrame(stateTime, true)
-        get() = Assets.kuronaRun.getKeyFrame(stateTime, true)
+    override var image: TextureRegion = Assets.runAnimationKurona.getKeyFrame(stateTime, true)
+        get() = Assets.runAnimationKurona.getKeyFrame(stateTime, true)
         private set
 
     private val _velocity: Vector2
@@ -87,9 +87,9 @@ class Kurona : ICharacterObject {
     }
 
     private fun updatePositionAndBounds(deltaTime: Float) {
-        position!!.add(_velocity.x * deltaTime, _velocity.y * deltaTime)
-        bounds!!.x = position!!.x - bounds!!.width / 2
-        bounds!!.y = position!!.y - bounds!!.height / 2
+        position.add(_velocity.x * deltaTime, _velocity.y * deltaTime)
+        bounds.x = position.x - bounds.width / 2
+        bounds.y = position.y - bounds.height / 2
     }
 
     override fun hitBarricade() {

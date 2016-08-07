@@ -23,7 +23,6 @@ class ExitScreen(internal val game: KuronanDash) : Screen {
 
         game.batch.begin()
         game.font.draw(game.batch, "Welcome to Exit Screen!!", 100f, 150f)
-        game.font.draw(game.batch, "Tap anywhere to begin!", 100f, 100f)
         game.batch.end()
     }
 

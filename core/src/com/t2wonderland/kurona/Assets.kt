@@ -30,8 +30,8 @@ object Assets {
     lateinit var selectStart: Sprite
     // game
     lateinit var gameAtlas: TextureAtlas
-    lateinit var runFrames : Array<TextureRegion?>
-    lateinit var kuronaRun: Animation
+    lateinit var runFramesKurona: Array<TextureRegion?>
+    lateinit var runAnimationKurona: Animation
     lateinit var gameBack: Sprite
     lateinit var gameRock: TextureRegion
     lateinit var gameCandy: TextureRegion
@@ -45,7 +45,14 @@ object Assets {
     fun load() {
         dot = 32
 
-        // title pictures
+        loadTitle()
+        loadSelect()
+        loadGame()
+        loadTutorial()
+    }
+
+    private fun loadTitle() {
+        // picture
         titleAtlas = TextureAtlas(Gdx.files.internal("title.pack"))
         titleBack = titleAtlas.createSprite("titleBack")
         titleBack.setPosition(0f, 0f)
@@ -58,16 +65,20 @@ object Assets {
         titleExit = titleAtlas.createSprite("titleExit")
         titleExit.setPosition((dot * 20).toFloat(), dot.toFloat())
 
-        // title music
+        // music
         titleMusic = Gdx.audio.newMusic(Gdx.files.internal("title.mp3"))
         titleMusic.isLooping = true
         titleMusic.volume = 0.5f
         if (Settings.soundEnabled) {
             titleMusic.play()
         }
-        clickSound = Gdx.audio.newSound(Gdx.files.internal("clickSound.wav"))
 
-        // select
+        // sound
+        clickSound = Gdx.audio.newSound(Gdx.files.internal("clickSound.wav"))
+    }
+
+    private fun loadSelect() {
+        // picture
         selectAtlas = TextureAtlas(Gdx.files.internal("select.pack"))
         selectKurona = selectAtlas.createSprite("selectKurona")
         selectKurona.setPosition(dot.toFloat(), (dot * 11).toFloat())
@@ -81,17 +92,21 @@ object Assets {
         selectBack.setPosition((dot * 15).toFloat(), dot.toFloat())
         selectStart = selectAtlas.createSprite("selectStart")
         selectStart.setPosition((dot * 20).toFloat(), dot.toFloat())
+    }
 
-        // game
-        runFrames = arrayOfNulls<TextureRegion>(3)
+    private fun loadGame() {
         gameAtlas = TextureAtlas(Gdx.files.internal("game.pack"))
-        for (i in 0..2) {
-            // TODO: 黒菜のリソース専用になってるのを要修正
-            runFrames[i] = gameAtlas.findRegion((i + 1).toString() + " - kurona-run")
-        }
-        kuronaRun = Animation(0.1f, *runFrames)
+
+        // character animation
+        loadKuronaAnimation()
+        loadKomaAnimation()
+        loadShishimaruAnimation()
+
+        // static objects
         gameRock = gameAtlas.findRegion("rock-normal")
         gameCandy = gameAtlas.findRegion("candy-normal")
+
+        // pictures
         val bgImg = Texture("bgSmall.png")
         bgImg.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat)
         gameBack = Sprite(bgImg, 0, 0, World.WIDTH * 20, World.HEIGHT)
@@ -99,12 +114,37 @@ object Assets {
         gameBack.u2 = 20f
         gameBack.v = 0f
         gameBack.v2 = 1f
+
+        // music
         gameMusic = Gdx.audio.newMusic(Gdx.files.internal("game1.mp3"))
         gameMusic.isLooping = true
         gameMusic.volume = 0.5f
+
+        // sound
         foodSound = Gdx.audio.newSound(Gdx.files.internal("foodSound.wav"))
         jumpSound = Gdx.audio.newSound(Gdx.files.internal("jumpSound.wav"))
         spSound = Gdx.audio.newSound(Gdx.files.internal("spSound.wav"))
+    }
+
+    private fun loadKuronaAnimation() {
+        // アニメーションのフレーム数が3
+        runFramesKurona = arrayOfNulls<TextureRegion>(3)
+        for (i in 0..2) {
+            runFramesKurona[i] = gameAtlas.findRegion((i + 1).toString() + " - kurona-run")
+        }
+        runAnimationKurona = Animation(0.1f, *runFramesKurona)
+    }
+
+    private fun loadKomaAnimation() {
+        // TODO: 独楽のアニメーション読み込み
+    }
+
+    private fun loadShishimaruAnimation() {
+        // TODO: 獅子丸のアニメーション読み込み
+    }
+
+    private fun loadTutorial() {
+        // TODO: チュートリアル画面のリソース読み込み
     }
 
     fun playSound(sound: Sound) {

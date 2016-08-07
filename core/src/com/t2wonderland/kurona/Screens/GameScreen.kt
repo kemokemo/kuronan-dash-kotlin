@@ -1,15 +1,13 @@
 package com.t2wonderland.kurona.Screens
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.t2wonderland.kurona.*
-import com.t2wonderland.kurona.Models.World
-import com.t2wonderland.kurona.Models.WorldRenderer
-import com.t2wonderland.kurona.Models.WorldListener
-import com.t2wonderland.kurona.Models.GameState
+import com.t2wonderland.kurona.Models.*
 
-class GameScreen(internal val _game: KuronanDash) : Screen {
+class GameScreen(internal val _game: KuronanDash, internal val selectedCharacter: CharacterSelect) : Screen {
 
     internal var _state: GameState
     internal var _camera: OrthographicCamera
@@ -25,18 +23,26 @@ class GameScreen(internal val _game: KuronanDash) : Screen {
     init {
         _camera = OrthographicCamera(KuronanDash.displayWidth.toFloat(), KuronanDash.displayHeight.toFloat())
         _camera.setToOrtho(false, KuronanDash.displayWidth.toFloat(), KuronanDash.displayHeight.toFloat())
-        _state = GameState.Running
+        _state = GameState.Ready
         _batcher = SpriteBatch()
-        _worldListener = WorldListener()
-        _world = World(_worldListener)
-        _renderer = WorldRenderer(_batcher, _world)
         _lastScore = 0
         _scoreString = "SCORE: 0"
+
+        _worldListener = WorldListener()
+        _world = World(_worldListener, selectedCharacter)
+        _renderer = WorldRenderer(_batcher, _world)
 
         if (Settings.soundEnabled) {
             Assets.titleMusic.stop()
             Assets.gameMusic.play()
         }
+    }
+
+    override fun render(delta: Float) {
+        if(_state == GameState.Running){
+            update(delta)
+        }
+        draw()
     }
 
     fun update(deltaTime: Float) {
@@ -49,9 +55,11 @@ class GameScreen(internal val _game: KuronanDash) : Screen {
         _world.update(deltaTime, World.acceleration)
     }
 
-    fun draw(deltaTime: Float) {
+    fun draw() {
+        // ゲーム世界自体の描画
         _renderer.render()
 
+        // ゲーム世界のメタ要素の描画
         _camera.update()
         _batcher.projectionMatrix = _camera.combined
         _batcher.enableBlending()
@@ -65,7 +73,14 @@ class GameScreen(internal val _game: KuronanDash) : Screen {
     }
 
     private fun presentReady() {
-        // TODO: ゲーム開始前のReady画面表示
+        // ゲーム開始前のReady画面表示
+        _game.batch.begin()
+        _game.font.draw(_game.batch, "Touch to start.", 100f, 150f)
+        _game.batch.end()
+
+        if (Gdx.input.justTouched()) {
+            _state = GameState.Running
+        }
     }
 
     private fun presentRunning() {
@@ -86,11 +101,6 @@ class GameScreen(internal val _game: KuronanDash) : Screen {
     private fun presentGameOver() {
         // TODO: ゲームオーバー画面の表示
         // スコア表示したりタイトルに戻るボタンあっても良いかも
-    }
-
-    override fun render(delta: Float) {
-        update(delta)
-        draw(delta)
     }
 
     override fun resize(width: Int, height: Int) {

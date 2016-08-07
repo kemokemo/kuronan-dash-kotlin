@@ -10,7 +10,7 @@ import com.badlogic.gdx.Gdx
 
 object Settings {
     var soundEnabled = true
-    // hich score
+    // high score
     val highScores = intArrayOf(100, 80, 50, 30, 10)
     val file = ".kuronandash"
 
