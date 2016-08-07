@@ -7,10 +7,11 @@ import com.t2wonderland.kurona.*;
 import com.t2wonderland.kurona.models.World;
 import com.t2wonderland.kurona.models.WorldRenderer;
 import com.t2wonderland.kurona.models.WorldListener;
+import com.t2wonderland.kurona.models.GameState;
 
 public class GameScreen implements Screen {
 
-	World.Game_State _state;
+	GameState _state;
 
 	final KuronanDash _game;
 	OrthographicCamera _camera;
@@ -27,7 +28,7 @@ public class GameScreen implements Screen {
 		this._game = game;
 		_camera = new OrthographicCamera(KuronanDash.displayWidth, KuronanDash.displayHeight);
 		_camera.setToOrtho(false, KuronanDash.displayWidth, KuronanDash.displayHeight);
-		_state = World.Game_State.Running;
+		_state = GameState.Running;
         _batcher = new SpriteBatch();
         _worldListener = new WorldListener();
 		_world = new World(_worldListener);
@@ -48,14 +49,12 @@ public class GameScreen implements Screen {
 	
 	private void updateRunning (float deltaTime) {
 		_world.update(deltaTime, World.acel);
-
-		// “_”‚ğXV
 	}
 	
 	public void draw (float deltaTime) {
 		_renderer.render();
 
-        // UI•”•i‚ğ•`‰æ
+        // UIï¿½ï¿½ï¿½iï¿½ï¿½`ï¿½ï¿½
 		_camera.update();
         _batcher.setProjectionMatrix(_camera.combined);
         _batcher.enableBlending();

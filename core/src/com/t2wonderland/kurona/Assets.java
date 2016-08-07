@@ -79,7 +79,6 @@ public class Assets {
 		gameRock = gameAtlas.findRegion("rock-normal");
 		gameCandy = gameAtlas.findRegion("candy-normal");
 		Texture bgImg = new Texture("bgSmall.png");
-		// ゲーム画面の背景を画像20枚分のステージにする
 		bgImg.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 		gameBack = new Sprite(bgImg, 0,0, World.WIDTH*20, World.HEIGHT);
 		gameBack.setU(0);

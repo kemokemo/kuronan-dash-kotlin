@@ -10,9 +10,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.t2wonderland.kurona.Assets;
+import com.t2wonderland.kurona.interfaces.IGameObject;
 import com.t2wonderland.kurona.objects.Candy;
 import com.t2wonderland.kurona.objects.Kurona;
-import com.t2wonderland.kurona.objects.Rock;
 
 public class WorldRenderer {
 
@@ -93,7 +93,7 @@ public class WorldRenderer {
 				world.kurona.position.y = 11;
 			}
 			else{
-				// îÕàÕäOÅAÇ»Ç…Ç‡ÇµÇ»Ç¢
+				// touched point is out of the range
 			}
 		}
 
@@ -104,12 +104,16 @@ public class WorldRenderer {
 	}
 	
 	private void renderItems () {
-		batch.draw(Assets.gameRock, world.rock.position.x, world.rock.position.y, Rock.WIDTH, Rock.HEIGHT);
+		Vector2 position = world.rock.getPosition();
+		Vector2 size = world.rock.getSize();
+		batch.draw(Assets.gameRock, position.x, position.y, size.x, size.y);
 
 		int len = world.candys.size();
 		for (int counter = 0; counter < len; counter++) {
-			Candy candy = world.candys.get(counter);
-			batch.draw(Assets.gameCandy, candy.position.x, candy.position.y, Candy.WIDTH, Candy.HEIGHT);
+			IGameObject candy = world.candys.get(counter);
+			Vector2 candyPosition = candy.getPosition();
+			Vector2 candySize = candy.getSize();
+			batch.draw(Assets.gameCandy, candyPosition.x, candyPosition.y, candySize.x, candySize.y);
 		}
 	}
 	

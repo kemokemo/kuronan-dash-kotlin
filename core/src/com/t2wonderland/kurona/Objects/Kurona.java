@@ -45,14 +45,14 @@ public class Kurona extends DynamicGameObject {
 		}
 		velocity.add(velX, velY);
 
-		// update position
+		// update _position
 		position.add(velocity.x * deltaTime, velocity.y * deltaTime);
 		bounds.x = position.x - bounds.width / 2;
 		bounds.y = position.y - bounds.height / 2;
 		
 		// update status
 		if (state == STATE_SLOW){
-			// SLOWƒ‚[ƒh‚Å‚Í•`‰æ‚àƒAƒjƒ[ƒVƒ‡ƒ“‚à‚ä‚Á‚­‚è‚É‚µ‚½‚¢‚Ì‚ÅAŒo‰ßŠÔ‚ğ”¼•ª‚É‚·‚é
+			// SLOWï¿½ï¿½ï¿½[ï¿½hï¿½Å‚Í•`ï¿½ï¿½ï¿½ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÅAï¿½oï¿½ßï¿½ï¿½Ô‚ğ”¼•ï¿½ï¿½É‚ï¿½ï¿½ï¿½
 			stateTime += deltaTime/2;
 		}
 		else{

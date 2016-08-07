@@ -1,13 +1,36 @@
 package com.t2wonderland.kurona.objects;
 
-import com.t2wonderland.kurona.models.GameObject;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.t2wonderland.kurona.interfaces.IGameObject;
 
-public class Rock extends GameObject {
+public class Rock implements IGameObject{
 
-    public static final float WIDTH = 1f;
-    public static final float HEIGHT = 1f;
+    private float WIDTH = 1f;
+    float HEIGHT = 1f;
 
-    public Rock(float x, float y) {
-        super(x, y, WIDTH, HEIGHT);
+    Vector2 _size = new Vector2(WIDTH, HEIGHT);
+    Vector2 _position;
+    Rectangle _bounds;
+
+    @Override
+    public void setInitialPosition(int x, int y) {
+        this._position = new Vector2(x, y);
+        this._bounds = new Rectangle(x - WIDTH / 2, y - HEIGHT / 2, WIDTH, HEIGHT);
+    }
+
+    @Override
+    public Vector2 getSize() {
+        return _size;
+    }
+
+    @Override
+    public Vector2 getPosition() {
+        return _position;
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return _bounds;
     }
 }
