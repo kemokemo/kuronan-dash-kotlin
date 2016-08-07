@@ -39,24 +39,24 @@ public class SelectScreen implements Screen {
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			camera.unproject(touchPos);
 
-			if (OverlapChecker.pointInRectangle(kuronaBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.INSTANCE.pointInRectangle(kuronaBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				return;
 			}
-			if (OverlapChecker.pointInRectangle(komaBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.INSTANCE.pointInRectangle(komaBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				return;
 			}
-			if (OverlapChecker.pointInRectangle(shishimaruBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.INSTANCE.pointInRectangle(shishimaruBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				return;
 			}
-			if (OverlapChecker.pointInRectangle(backBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.INSTANCE.pointInRectangle(backBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new TitleScreen(game));
 				return;
 			}
-			if (OverlapChecker.pointInRectangle(startBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.INSTANCE.pointInRectangle(startBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new GameScreen(game));
 				return;

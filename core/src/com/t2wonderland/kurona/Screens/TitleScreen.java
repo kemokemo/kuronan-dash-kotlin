@@ -38,22 +38,22 @@ public class TitleScreen implements Screen {
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			camera.unproject(touchPos);
 
-			if (OverlapChecker.pointInRectangle(startBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.INSTANCE.pointInRectangle(startBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new SelectScreen(game));
 				return;
 			}
-			if (OverlapChecker.pointInRectangle(scoresBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.INSTANCE.pointInRectangle(scoresBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new ScoresScreen(game));
 				return;
 			}
-			if (OverlapChecker.pointInRectangle(tutorialBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.INSTANCE.pointInRectangle(tutorialBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new TutorialScreen(game));
 				return;
 			}
-			if (OverlapChecker.pointInRectangle(exitBounds, touchPos.x, touchPos.y)) {
+			if (OverlapChecker.INSTANCE.pointInRectangle(exitBounds, touchPos.x, touchPos.y)) {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new ExitScreen(game));
 				return;

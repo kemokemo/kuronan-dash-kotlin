@@ -1,6 +1,7 @@
 package com.t2wonderland.kurona.Models
 
 import com.badlogic.gdx.math.Vector2
+import com.t2wonderland.kurona.Interfaces.HeightCalculator
 import java.util.ArrayList
 import java.util.Random
 
@@ -14,7 +15,7 @@ class World(val listener: WorldListener) {
     private val _characterFactory: CharacterFactory
     val _character: ICharacterObject
 
-    val barricade: Rock
+    val barricadeList: ArrayList<IStaticObject>
     val itemList: ArrayList<IStaticObject>
     val rand: Random
     var score: Int = 0
@@ -25,8 +26,7 @@ class World(val listener: WorldListener) {
         this._characterFactory = CharacterFactory()
         this._character = _characterFactory.createCharacter()
 
-        this.barricade = Rock()
-        this.barricade.setInitialPosition(10f, 1f)
+        this.barricadeList = ArrayList()
         this.itemList = ArrayList()
         this.score = 0
         this.state = WorldState.Running
@@ -36,15 +36,21 @@ class World(val listener: WorldListener) {
     }
 
     private fun generateLevel(level : Int) {
-        // TODO: レベルに応じてアイテムをつくる
-        while (itemList.size < 10 * (10-level)) {
-            val candy = Candy()
-            // TODO: 乱数から3段階の高さ情報を作る
-            candy.setInitialPosition(WIDTH.toFloat() * 20f * rand.nextFloat(), 1f)
-            itemList.add(candy)
+        for (counter in 0..10 * (10-level)) {
+            val item = Candy()
+            // 乱数から3段階の高さ情報を作る
+            item.setInitialPosition(WIDTH.toFloat() * 20f * rand.nextFloat(),
+                    HeightCalculator.Calculate(HEIGHT.toFloat() * rand.nextFloat()) ?: 1f)
+            itemList.add(item)
         }
 
-        // TODO: レベルに応じて障害物をつくる
+        for(counter in 0..20 * level){
+            val barricade = Rock()
+            // 乱数から3段階の高さ情報を作る
+            barricade.setInitialPosition(WIDTH.toFloat() * 20f * rand.nextFloat(),
+                    HeightCalculator.Calculate(HEIGHT.toFloat() * rand.nextFloat()) ?: 1f)
+            barricadeList.add(barricade)
+        }
     }
 
     fun update(deltaTime: Float, acceleration: Vector2) {
@@ -63,11 +69,16 @@ class World(val listener: WorldListener) {
     }
 
     private fun checkBarricadeCollisions() {
-        if (OverlapChecker.overlapRectangles(_character.bounds, barricade.bounds)) {
-            _character.hitBarricade()
-        } else {
-            _character.releaseBarricade()
+        var hit = false
+        for(barricade in barricadeList){
+            if (OverlapChecker.overlapRectangles(_character.bounds, barricade.bounds)) {
+                _character.hitBarricade()
+                hit = true
+            }
         }
+
+        // どの障害物ともあたってない状態ならリリースする
+        if(!hit) _character.releaseBarricade()
     }
 
     private fun checkItemCollisions() {
