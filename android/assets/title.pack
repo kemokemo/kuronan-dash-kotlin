@@ -10,28 +10,28 @@ titleBack
   orig: 800, 480
   offset: 0, 0
   index: -1
-titleTutorial
+titleExit
   rotate: false
   xy: 803, 417
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
-titleStart
+titleScore
   rotate: false
   xy: 803, 351
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
-titleExit
+titleStart
   rotate: false
   xy: 803, 285
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
-titleScore
+titleTutorial
   rotate: false
   xy: 803, 219
   size: 128, 64

@@ -30,8 +30,6 @@ object Assets {
     lateinit var selectStart: Sprite
     // game
     lateinit var gameAtlas: TextureAtlas
-    lateinit var runFramesKurona: Array<TextureRegion?>
-    lateinit var runAnimationKurona: Animation
     lateinit var gameBack: Sprite
     lateinit var gameRock: TextureRegion
     lateinit var gameCandy: TextureRegion
@@ -39,6 +37,11 @@ object Assets {
     lateinit var foodSound: Sound
     lateinit var jumpSound: Sound
     lateinit var spSound: Sound
+    // game - character
+    lateinit var runFramesKurona: Array<TextureRegion?>
+    lateinit var runAnimationKurona: Animation
+    lateinit var runFramesKoma: Array<TextureRegion?>
+    lateinit var runAnimationKoma: Animation
 
     var dot: Int = 0
 
@@ -127,16 +130,23 @@ object Assets {
     }
 
     private fun loadKuronaAnimation() {
-        // アニメーションのフレーム数が3
-        runFramesKurona = arrayOfNulls<TextureRegion>(3)
-        for (i in 0..2) {
-            runFramesKurona[i] = gameAtlas.findRegion((i + 1).toString() + " - kurona-run")
+        // 黒菜のアニメーション読み込み
+        val frame = 3
+        runFramesKurona = arrayOfNulls<TextureRegion>(frame)
+        for (index in 0..(frame-1)) {
+            runFramesKurona[index] = gameAtlas.findRegion("kurona_run", index)
         }
         runAnimationKurona = Animation(0.1f, *runFramesKurona)
     }
 
     private fun loadKomaAnimation() {
-        // TODO: 独楽のアニメーション読み込み
+        // 独楽のアニメーション読み込み
+        val frame = 4
+        runFramesKoma = arrayOfNulls<TextureRegion>(frame)
+        for (index in 0..(frame-1)) {
+            runFramesKoma[index] = gameAtlas.findRegion("koma_run", index)
+        }
+        runAnimationKoma = Animation(0.1f, *runFramesKoma)
     }
 
     private fun loadShishimaruAnimation() {
