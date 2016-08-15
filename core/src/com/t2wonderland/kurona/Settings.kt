@@ -15,18 +15,18 @@ object Settings {
     val file = ".kuronandash"
 
     fun load() {
-        var `in`: BufferedReader? = null
+        var reader: BufferedReader? = null
         try {
-            `in` = BufferedReader(InputStreamReader(Gdx.files.external(file).read()))
-            soundEnabled = java.lang.Boolean.parseBoolean(`in`.readLine())
+            reader = BufferedReader(InputStreamReader(Gdx.files.external(file).read()))
+            soundEnabled = java.lang.Boolean.parseBoolean(reader.readLine())
             for (i in 0..4) {
-                highScores[i] = Integer.parseInt(`in`.readLine())
+                highScores[i] = Integer.parseInt(reader.readLine())
             }
         } catch (e: Throwable) {
             // TODO: ログ記録
         } finally {
             try {
-                if (`in` != null) `in`.close()
+                if (reader != null) reader.close()
             } catch (e: IOException) {
                 // TODO: ログ記録
             }
@@ -35,19 +35,19 @@ object Settings {
     }
 
     fun save() {
-        var out: BufferedWriter? = null
+        var writer: BufferedWriter? = null
         try {
-            out = BufferedWriter(OutputStreamWriter(Gdx.files.external(file).write(false)))
-            out.write(java.lang.Boolean.toString(soundEnabled))
+            writer = BufferedWriter(OutputStreamWriter(Gdx.files.external(file).write(false)))
+            writer.write(java.lang.Boolean.toString(soundEnabled))
             for (i in 0..4) {
-                out.write(Integer.toString(highScores[i]))
+                writer.write(Integer.toString(highScores[i]))
             }
 
         } catch (e: Throwable) {
             // TODO: ログ記録
         } finally {
             try {
-                if (out != null) out.close()
+                if (writer != null) writer.close()
             } catch (e: IOException) {
                 // TODO: ログ記録
             }

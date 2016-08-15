@@ -10,7 +10,7 @@ import com.t2wonderland.kurona.Interfaces.ICharacterObject
 class Koma : ICharacterObject {
 
     private val VELOCITY_DASH = 10f
-    private val VELOCITY_SLOW = 2.5f
+    private val VELOCITY_SLOW = 3.0f
     private val VELOCITY_SP = 20f
 
     val WIDTH = 2f

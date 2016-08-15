@@ -42,6 +42,8 @@ object Assets {
     lateinit var runAnimationKurona: Animation
     lateinit var runFramesKoma: Array<TextureRegion?>
     lateinit var runAnimationKoma: Animation
+    lateinit var runFramesShishimaru: Array<TextureRegion?>
+    lateinit var runAnimationShishimaru: Animation
 
     var dot: Int = 0
 
@@ -150,7 +152,13 @@ object Assets {
     }
 
     private fun loadShishimaruAnimation() {
-        // TODO: 獅子丸のアニメーション読み込み
+        // 獅子丸のアニメーション読み込み
+        val frame = 4
+        runFramesShishimaru = arrayOfNulls<TextureRegion>(frame)
+        for (index in 0..(frame-1)) {
+            runFramesShishimaru[index] = gameAtlas.findRegion("shishimaru_run", index)
+        }
+        runAnimationShishimaru = Animation(0.1f, *runFramesShishimaru)
     }
 
     private fun loadTutorial() {
