@@ -4,24 +4,18 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.Viewport
 import com.t2wonderland.kurona.Assets
-import com.t2wonderland.kurona.Interfaces.CharacterState
-import com.t2wonderland.kurona.Interfaces.HeightCalculator
 
-class WorldRenderer(internal var batch: SpriteBatch, internal var world:
-
-World) {
+class WorldRenderer(internal var batch: SpriteBatch, internal var world: World) {
     internal var camera: OrthographicCamera
     internal var viewport: Viewport
     internal var pos: Vector2
 
     init {
-
         // initialize the camera
         this.camera = OrthographicCamera(World.WIDTH.toFloat(), World.HEIGHT.toFloat())
         this.camera.setToOrtho(false, World.WIDTH.toFloat(), World.HEIGHT.toFloat())

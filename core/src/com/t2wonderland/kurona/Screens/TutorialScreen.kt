@@ -19,9 +19,9 @@ class TutorialScreen(internal val game: KuronanDash) : Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
         camera.update()
         game.batch.projectionMatrix = camera.combined
+
         game.batch.begin()
         game.font.draw(game.batch, "Welcome to Tutorial Screen!!", 100f, 150f)
-        game.font.draw(game.batch, "Tap anywhere to begin!", 100f, 100f)
         game.batch.end()
     }
 

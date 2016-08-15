@@ -10,7 +10,7 @@ selectDescription
   orig: 288, 320
   offset: 0, 0
   index: -1
-selectShishimaru
+selectKoma
   rotate: false
   xy: 291, 291
   size: 384, 96
@@ -24,21 +24,21 @@ selectKurona
   orig: 384, 96
   offset: 0, 0
   index: -1
-selectKoma
+selectShishimaru
   rotate: false
   xy: 291, 95
   size: 384, 96
   orig: 384, 96
   offset: 0, 0
   index: -1
-selectStart
+selectBack
   rotate: false
   xy: 1, 1
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
-selectBack
+selectStart
   rotate: false
   xy: 677, 323
   size: 128, 64

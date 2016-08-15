@@ -1,7 +1,7 @@
 package com.t2wonderland.kurona.Models
 
 import com.badlogic.gdx.math.Vector2
-import com.t2wonderland.kurona.Interfaces.HeightCalculator
+import com.t2wonderland.kurona.Models.HeightCalculator
 import java.util.ArrayList
 import java.util.Random
 
@@ -10,7 +10,7 @@ import com.t2wonderland.kurona.Interfaces.IStaticObject
 import com.t2wonderland.kurona.Objects.Candy
 import com.t2wonderland.kurona.Objects.Rock
 
-class World(val listener: WorldListener) {
+class World(val listener: WorldListener, val selectedCharacter: CharacterSelect) {
 
     private val _characterFactory: CharacterFactory
     val _character: ICharacterObject
@@ -23,7 +23,7 @@ class World(val listener: WorldListener) {
 
     init {
         // 外部からキャクター選択情報をもらってFactoryに渡す
-        this._characterFactory = CharacterFactory()
+        this._characterFactory = CharacterFactory(selectedCharacter)
         this._character = _characterFactory.createCharacter()
 
         this.barricadeList = ArrayList()

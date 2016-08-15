@@ -7,11 +7,11 @@ import com.t2wonderland.kurona.Assets
 import com.t2wonderland.kurona.Interfaces.CharacterState
 import com.t2wonderland.kurona.Interfaces.ICharacterObject
 
-class Kurona : ICharacterObject {
+class Koma : ICharacterObject {
 
-    private val VELOCITY_DASH = 11f
-    private val VELOCITY_SLOW = 2.5f
-    private val VELOCITY_SP = 22f
+    private val VELOCITY_DASH = 10f
+    private val VELOCITY_SLOW = 3.0f
+    private val VELOCITY_SP = 20f
 
     val WIDTH = 2f
     val HEIGHT = 2f
@@ -26,8 +26,8 @@ class Kurona : ICharacterObject {
     override var position: Vector2 = Vector2()
     override val size = Vector2(WIDTH, HEIGHT)
     override val bounds: Rectangle = Rectangle()
-    override var image: TextureRegion = Assets.runAnimationKurona.getKeyFrame(stateTime, true)
-        get() = Assets.runAnimationKurona.getKeyFrame(stateTime, true)
+    override var image: TextureRegion = Assets.runAnimationKoma.getKeyFrame(stateTime, true)
+        get() = Assets.runAnimationKoma.getKeyFrame(stateTime, true)
         private set
 
     private val _velocity: Vector2
