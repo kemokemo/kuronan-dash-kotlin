@@ -3,4 +3,5 @@ sudo: true
 jdk:
     - oraclejdk8
 script:
+    - chmod +x gradlew
     - ./gradlew test
