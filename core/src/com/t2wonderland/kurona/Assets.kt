@@ -38,12 +38,9 @@ object Assets {
     lateinit var jumpSound: Sound
     lateinit var spSound: Sound
     // game - character
-    lateinit var runFramesKurona: Array<TextureRegion?>
-    lateinit var runAnimationKurona: Animation
-    lateinit var runFramesKoma: Array<TextureRegion?>
-    lateinit var runAnimationKoma: Animation
-    lateinit var runFramesShishimaru: Array<TextureRegion?>
-    lateinit var runAnimationShishimaru: Animation
+    lateinit var runAnimationKurona: Animation<TextureRegion>
+    lateinit var runAnimationKoma: Animation<TextureRegion>
+    lateinit var runAnimationShishimaru: Animation<TextureRegion>
 
     var dot: Int = 0
 
@@ -133,32 +130,32 @@ object Assets {
 
     private fun loadKuronaAnimation() {
         // 黒菜のアニメーション読み込み
-        val frame = 3
-        runFramesKurona = arrayOfNulls<TextureRegion>(frame)
-        for (index in 0..(frame-1)) {
-            runFramesKurona[index] = gameAtlas.findRegion("kurona_run", index)
+        val num = 3
+        var frames = arrayOfNulls<TextureRegion>(num)
+        for (index in 0..(num-1)) {
+            frames[index] = gameAtlas.findRegion("kurona_run", index)
         }
-        runAnimationKurona = Animation(0.1f, *runFramesKurona)
+        runAnimationKurona = Animation<TextureRegion>(0.1f, *frames)
     }
 
     private fun loadKomaAnimation() {
         // 独楽のアニメーション読み込み
         val frame = 4
-        runFramesKoma = arrayOfNulls<TextureRegion>(frame)
+        var frames = arrayOfNulls<TextureRegion>(frame)
         for (index in 0..(frame-1)) {
-            runFramesKoma[index] = gameAtlas.findRegion("koma_run", index)
+            frames[index] = gameAtlas.findRegion("koma_run", index)
         }
-        runAnimationKoma = Animation(0.1f, *runFramesKoma)
+        runAnimationKoma = Animation<TextureRegion>(0.1f, *frames)
     }
 
     private fun loadShishimaruAnimation() {
         // 獅子丸のアニメーション読み込み
         val frame = 4
-        runFramesShishimaru = arrayOfNulls<TextureRegion>(frame)
+        var frames = arrayOfNulls<TextureRegion>(frame)
         for (index in 0..(frame-1)) {
-            runFramesShishimaru[index] = gameAtlas.findRegion("shishimaru_run", index)
+            frames[index] = gameAtlas.findRegion("shishimaru_run", index)
         }
-        runAnimationShishimaru = Animation(0.1f, *runFramesShishimaru)
+        runAnimationShishimaru = Animation<TextureRegion>(0.1f, *frames)
     }
 
     private fun loadTutorial() {

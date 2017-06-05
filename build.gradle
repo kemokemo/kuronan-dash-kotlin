@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.0.2'
+    ext.kotlin_version = '1.1.2'
     repositories {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
@@ -17,8 +17,8 @@ allprojects {
 
     version = '1.0'
     ext {
-        appName = "my-gdx-game"
-        gdxVersion = '1.6.5'
+        appName = "kuronandash"
+        gdxVersion = '1.9.6'
         roboVMVersion = '1.6.0'
         box2DLightsVersion = '1.4'
         ashleyVersion = '1.6.0'
