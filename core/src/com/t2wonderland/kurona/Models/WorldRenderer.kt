@@ -27,7 +27,7 @@ class WorldRenderer(internal var batch: SpriteBatch, internal var world: World) 
         Gdx.gl.glClearColor(0f, 0.3f, 1f, 1f)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
 
-        val position = world._character.position
+        val position = world.character.position
         if (position.x > camera.position.x) {
             camera.position.x = position.x
         }
@@ -55,11 +55,11 @@ class WorldRenderer(internal var batch: SpriteBatch, internal var world: World) 
     }
 
     private fun renderCharacter() {
-        val position = world._character.position
+        val position = world.character.position
         position.y = getHeightFromUserInput() ?: position.y
 
-        val size = world._character.size
-        batch.draw(world._character.image, position.x, position.y, size.x, size.y)
+        val size = world.character.size
+        batch.draw(world.character.image, position.x, position.y, size.x, size.y)
     }
 
     private fun getHeightFromUserInput(): Float? {
