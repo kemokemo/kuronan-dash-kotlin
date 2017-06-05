@@ -100,9 +100,9 @@ object Assets {
         gameAtlas = TextureAtlas(Gdx.files.internal("game.pack"))
 
         // character animation
-        loadKuronaAnimation()
-        loadKomaAnimation()
-        loadShishimaruAnimation()
+        runAnimationKurona = loadAnimation(3, "kurona_run")
+        runAnimationKoma = loadAnimation(4, "koma_run")
+        runAnimationShishimaru = loadAnimation(4, "shishimaru_run")
 
         // static objects
         gameRock = gameAtlas.findRegion("rock-normal")
@@ -128,34 +128,12 @@ object Assets {
         spSound = Gdx.audio.newSound(Gdx.files.internal("spSound.wav"))
     }
 
-    private fun loadKuronaAnimation() {
-        // 黒菜のアニメーション読み込み
-        val num = 3
-        var frames = arrayOfNulls<TextureRegion>(num)
-        for (index in 0..(num-1)) {
-            frames[index] = gameAtlas.findRegion("kurona_run", index)
+    private fun loadAnimation(frameNum: Int, prefix: String): Animation<TextureRegion> {
+        var frames = arrayOfNulls<TextureRegion>(frameNum)
+        for (index in 0..(frameNum-1)) {
+            frames[index] = gameAtlas.findRegion(prefix, index)
         }
-        runAnimationKurona = Animation<TextureRegion>(0.1f, *frames)
-    }
-
-    private fun loadKomaAnimation() {
-        // 独楽のアニメーション読み込み
-        val frame = 4
-        var frames = arrayOfNulls<TextureRegion>(frame)
-        for (index in 0..(frame-1)) {
-            frames[index] = gameAtlas.findRegion("koma_run", index)
-        }
-        runAnimationKoma = Animation<TextureRegion>(0.1f, *frames)
-    }
-
-    private fun loadShishimaruAnimation() {
-        // 獅子丸のアニメーション読み込み
-        val frame = 4
-        var frames = arrayOfNulls<TextureRegion>(frame)
-        for (index in 0..(frame-1)) {
-            frames[index] = gameAtlas.findRegion("shishimaru_run", index)
-        }
-        runAnimationShishimaru = Animation<TextureRegion>(0.1f, *frames)
+        return Animation<TextureRegion>(0.1f, *frames)
     }
 
     private fun loadTutorial() {

@@ -21,8 +21,8 @@ class SelectScreen(internal val game: KuronanDash) : Screen {
     internal var selectedCharacter: CharacterSelect
 
     init {
-        camera = OrthographicCamera(KuronanDash.displayWidth.toFloat(), KuronanDash.displayHeight.toFloat())
-        camera.setToOrtho(false, KuronanDash.displayWidth.toFloat(), KuronanDash.displayHeight.toFloat())
+        camera = OrthographicCamera(game.Width.toFloat(), game.Height.toFloat())
+        camera.setToOrtho(false, game.Width.toFloat(), game.Height.toFloat())
 
         // regions of the buttons
         boundsKurona = Assets.selectKurona.boundingRectangle

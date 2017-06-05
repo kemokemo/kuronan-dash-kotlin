@@ -11,10 +11,10 @@ class KuronanDash : Game() {
     lateinit var batch: SpriteBatch
     lateinit var font: BitmapFont
     lateinit internal var renderer: ShapeRenderer
+    val Width = 800
+    val Height = 480
 
     override fun create() {
-        displayWidth = 800
-        displayHeight = 480
         batch = SpriteBatch()
         renderer = ShapeRenderer()
         //Use LibGDX's default Arial font.
@@ -42,10 +42,5 @@ class KuronanDash : Game() {
     }
 
     override fun resume() {
-    }
-
-    companion object {
-        var displayWidth: Int = 0
-        var displayHeight: Int = 0
     }
 }

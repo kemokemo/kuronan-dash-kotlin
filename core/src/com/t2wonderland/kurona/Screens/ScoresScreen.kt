@@ -10,8 +10,8 @@ class ScoresScreen(internal val game: KuronanDash) : Screen {
     internal var camera: OrthographicCamera
 
     init {
-        camera = OrthographicCamera(KuronanDash.displayWidth.toFloat(), KuronanDash.displayHeight.toFloat())
-        camera.setToOrtho(false, KuronanDash.displayWidth.toFloat(), KuronanDash.displayHeight.toFloat())
+        camera = OrthographicCamera(game.Width.toFloat(), game.Height.toFloat())
+        camera.setToOrtho(false, game.Width.toFloat(), game.Height.toFloat())
     }
 
     fun draw(deltaTime: Float) {

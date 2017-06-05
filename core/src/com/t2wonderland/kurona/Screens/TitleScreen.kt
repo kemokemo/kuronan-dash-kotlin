@@ -18,8 +18,8 @@ class TitleScreen(internal val game: KuronanDash) : Screen {
     internal var exitBounds: Rectangle
 
     init {
-        this.camera = OrthographicCamera(KuronanDash.displayWidth.toFloat(), KuronanDash.displayHeight.toFloat())
-        this.camera.setToOrtho(false, KuronanDash.displayWidth.toFloat(), KuronanDash.displayHeight.toFloat())
+        this.camera = OrthographicCamera(game.Width.toFloat(), game.Height.toFloat())
+        this.camera.setToOrtho(false, game.Width.toFloat(), game.Height.toFloat())
 
         // regions of the buttons
         this.startBounds = Assets.titleStart.boundingRectangle

@@ -21,8 +21,8 @@ class GameScreen(internal val _game: KuronanDash, internal val selectedCharacter
     internal var _scoreString: String
 
     init {
-        _camera = OrthographicCamera(KuronanDash.displayWidth.toFloat(), KuronanDash.displayHeight.toFloat())
-        _camera.setToOrtho(false, KuronanDash.displayWidth.toFloat(), KuronanDash.displayHeight.toFloat())
+        _camera = OrthographicCamera(_game.Width.toFloat(), _game.Height.toFloat())
+        _camera.setToOrtho(false, _game.Width.toFloat(), _game.Height.toFloat())
         _state = GameState.Ready
         _batcher = SpriteBatch()
         _lastScore = 0
